@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Route, Link, withRouter} from 'react-router-dom';
 
-import Attendance from '../workspace/attendance';
+import Attendance from '../workspace/attendance/attendance';
 import Vacation from '../workspace/vacation';
 import Expense from '../workspace/expense';
 import Salary from '../workspace/salary';
@@ -26,38 +26,46 @@ const SubMenu = Menu.SubMenu;
 
 class SiderBar extends React.Component{
 
+	constructor(props) {
+		super(props)
+		// this.pus = this.register.bind(pus)
+		this.handleClick = this.handleClick.bind(this)
+	}
+
 	state = {
 	    current: '1',
 	    openKeys: [],
 	  }
-	  handleClick = (e) => {
-	    console.log('Clicked: ', e);
-	    this.setState({ current: e.key });
-	  }
-	  onOpenChange = (openKeys) => {
-	    const state = this.state;
-	    const latestOpenKey = openKeys.find(key => !(state.openKeys.indexOf(key) > -1));
-	    const latestCloseKey = state.openKeys.find(key => !(openKeys.indexOf(key) > -1));
+  handleClick = (e) => {
+    console.log('Clicked: ', e);
+  	this.props.history.push(e.key);
+    // this.setState({ current: e.key });
+  }
+  onOpenChange = (openKeys) => {
+    const state = this.state;
+    const latestOpenKey = openKeys.find(key => !(state.openKeys.indexOf(key) > -1));
+    const latestCloseKey = state.openKeys.find(key => !(openKeys.indexOf(key) > -1));
 
-	    let nextOpenKeys = [];
-	    if (latestOpenKey) {
-	      nextOpenKeys = this.getAncestorKeys(latestOpenKey).concat(latestOpenKey);
-	    }
-	    if (latestCloseKey) {
-	      nextOpenKeys = this.getAncestorKeys(latestCloseKey);
-	    }
-	    this.setState({ openKeys: nextOpenKeys });
-	  }
-	  getAncestorKeys = (key) => {
-	    const map = {
-	      sub10: ['sub2'],
-	    };
-	    return map[key] || [];
-	  }
-	  pus = (e) => {
-	  	console.log(this.props);
-	  	this.props.history.push('/record/staff');
-	  }
+    let nextOpenKeys = [];
+    if (latestOpenKey) {
+      nextOpenKeys = this.getAncestorKeys(latestOpenKey).concat(latestOpenKey);
+    }
+    if (latestCloseKey) {
+      nextOpenKeys = this.getAncestorKeys(latestCloseKey);
+    }
+    this.setState({ openKeys: nextOpenKeys });
+  }
+  getAncestorKeys = (key) => {
+  	console.log(key);
+    const map = {
+      sub10: ['sub2'],
+    };
+    return map[key] || [];
+  }
+  pus = (e) => {
+  	console.log(this.props);
+  	this.props.history.push('/record/staff');
+  }
 	render() {
 		const navListW = [
 			{
@@ -134,8 +142,9 @@ class SiderBar extends React.Component{
 			        	this.props.history.push('/');
 			        }}>首页</span></span>}></SubMenu>
 			        <SubMenu key="sub2" title={<span><Icon type="appstore" /><span>工作台</span></span>}>
+			        	{/*<Menu.Item key='2' onClick={this.handleClick}>sssssss</Menu.Item>*/}
 			        	{navListW.map(v=>(
-			        		<Menu.Item key={v.path}><Link to={v.path}>{v.text}</Link></Menu.Item>
+			        		<Menu.Item key={v.path} onClick={this.handleClick}><Link to={v.path}>{v.text}</Link></Menu.Item>
 			        	))}
 			        </SubMenu>
 			        <SubMenu key="sub3" title={<span><Icon type="appstore" /><span>档案管理</span></span>}>
