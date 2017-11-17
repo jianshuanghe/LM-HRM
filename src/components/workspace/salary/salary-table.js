@@ -67,28 +67,11 @@ const columns = [{
     key: 'action',
     render: ()=><Button>action</Button>
 }];
-const data = [{
-  key: '1',
-  id: '12345',
-  name: 32,
-  rank: '员工',
-  department: '技术部',
-  baseSalary: 1234,
-  mealAllowance: 1234,
-  academicSubsidy: 1234,
-  titleSubsidy: 1234,
-  otherSubsidies: 1234,
-  overtimePay: 1234,
-  attendanceDeduction: 1234,
-  fiveInsurances: 1234,
-  accumulationFund: 1234,
-  tax: 1234,
-  actualAmount: 1234 
-}]
+
 class SalaryTable extends React.Component{
     render() {
         return (
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={this.props.data} />
         )
     }
 }
