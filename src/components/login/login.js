@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../../common/logo/logo.js';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+// import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Input, Button } from 'antd';
 import {connect} from 'react-redux';
 import {login} from '../../redux/user.redux';
 import './login.css';

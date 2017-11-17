@@ -1,6 +1,8 @@
 import React from 'react';
-import { DatePicker, Input, Select, Upload, message, Button, Icon, Table } from 'antd';
-import AttendanceTable from './attendance-table';
+import { DatePicker, Input, Select, Upload, message, Button, Icon } from 'antd';
+// import AttendanceTable from './attendance-table';
+import EditableTable from './attendance-table';
+import axios from 'axios';
 import './attendance.css'
 const { RangePicker } = DatePicker;
 const Option = Select.Option;
@@ -21,6 +23,52 @@ class Attendance extends React.Component{
 		this.onDateChange = this.onDateChange.bind(this);
 		this.handleRankChange = this.handleRankChange.bind(this);
 		this.handleValueChange = this.handleValueChange.bind(this);
+		this.query = this.query.bind(this);
+	}
+
+	componentWillMount() {
+	  console.log('componentWillMount attendance');
+	  this.query();
+	}
+
+	componentDidMount() {
+	  console.log('componentDidMount attendance');
+	  // this.query();
+	}
+
+	getDate() {
+		// /department/findAll?pageNumber=1&pageSize=10
+		console.log('obj');
+		axios.get('/department/findAll?pageNumber=1&pageSize=10', {})
+			.then(res => {
+				console.log(res.data);
+			})
+	}
+
+	query() {
+		let a  ={};
+		console.log(a);
+		a.pageNumber=1;
+		a.pageSize=10;
+		axios.get('/department/findAll', {params:a})
+			.then(res => {
+				console.log(res.data);
+				let test = {};
+				let testt = [];
+				test.identifier = res.data.content[0].id;
+				test.name = res.data.content[0].departmentName;
+				test.rank = res.data.content[0].dr;
+				test.department = res.data.content[0].departmentCode;
+				testt[0] = test;
+				this.setState({table: testt});
+				console.log('this.state');
+				console.log(this.state);
+				this.toChild();
+			})
+	}
+	toChild () {
+		console.log("toChild");
+		this.refs.getDataFF.getDataFromFather()
 	}
 
 	onDateChange = (value, dateString) => {
@@ -39,7 +87,6 @@ class Attendance extends React.Component{
 	handleValueChange(e) {
 	  console.log(e.target.value);
 	  console.log(e.target.dataset.type);
-	  const a = e.target.dataset.type;
 	  this.setState({[e.target.dataset.type]: e.target.value});
 	}
 
@@ -76,7 +123,7 @@ class Attendance extends React.Component{
 	        <Input placeholder="员工编号" data-type="identifier" onBlur={this.handleValueChange} />
 	      </div>
 	      <div>
-	        <Button type="primary">查询</Button>
+	        <Button type="primary" onClick={this.query}>查询</Button>
 	        <Upload {...uploadCfg}>
 	           <Button>
 	             <Icon type="upload" /> Click to Upload
@@ -84,7 +131,9 @@ class Attendance extends React.Component{
 	         </Upload>
 	        <Button type="primary">模板下载</Button>
 	      </div>
-	      <AttendanceTable />
+	      <div className="table-container">
+	      	<EditableTable data={this.state.table} ref="getDataFF"/>
+	      </div>
 		  </div>
 		)
 	}
