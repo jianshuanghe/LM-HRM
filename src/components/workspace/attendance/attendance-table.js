@@ -41,7 +41,7 @@ class EditableCell extends React.Component {
     this.setState({ value });
   }
   render() {
-    console.log('render 11111');
+    // console.log('render 11111');
     const { value, editable } = this.state;
     return (
       <div>
@@ -64,23 +64,23 @@ class EditableCell extends React.Component {
 }
 
 class EditableTable extends React.Component {
-  componentWillReceiveProps(nextProps){
-    console.log('componentWillReceiveProps EditableTable###');
-    console.log(this.props);
-    console.log(nextProps);
-    console.log(this.state);
-    // this.setState(data: nextProps);
-    // this.getDataFromFather();
-  }
-  componentDidMount() {
-    console.log('componentDidMount EditableTable');
-    console.log(this.props);
-  }
-  componentDidUpdate() {
-    console.log('componentDidUpdate EditableTable');
-    console.log(this.props);
-    // this.getDataFromFather();
-  }
+  // componentWillReceiveProps(nextProps){
+  //   console.log('componentWillReceiveProps EditableTable###');
+  //   console.log(this.props);
+  //   console.log(nextProps);
+  //   console.log(this.state);
+  //   // this.setState(data: nextProps);
+  //   // this.getDataFromFather();
+  // }
+  // componentDidMount() {
+  //   console.log('componentDidMount EditableTable');
+  //   console.log(this.props);
+  // }
+  // componentDidUpdate() {
+  //   console.log('componentDidUpdate EditableTable');
+  //   console.log(this.props);
+  //   // this.getDataFromFather();
+  // }
   constructor(props) {
     super(props);
     this.columns = [{
@@ -242,22 +242,26 @@ class EditableTable extends React.Component {
     console.log(data);
     let dataTemp = [];
     for (let i = 0; i < data.length; i++) {
-      let temp = this.state.dataEg[0];
+      debugger;
+      let temp = JSON.parse(JSON.stringify(this.state.dataEg[0]));
+      // alert(i);
       console.log('temp');
       console.log(temp);
+      console.log(this.state.dataEg[0]);
       Object.keys(temp).forEach((item) => {
-        console.log(item);
+        // console.log(item);
         if (item === 'key') {
-          console.log('key &&&&&&&data[i].identifier');
-          console.log(data[i].identifier);
+          // console.log('key &&&&&&&data[i].identifier');
+          // console.log(data[i].identifier);
           temp[item] = data[i].identifier;
         }
-        console.log(data[i][item]);
+        // console.log(data[i][item]);
         if (data[i][item] !== undefined) {
-          console.log(data[i][item]);
+          // console.log(data[i][item]);
           temp[item].value = data[i][item];
         }
       });
+      console.log(temp);
       dataTemp[i] = temp;
     }
     console.log('dataTemp B');
@@ -313,7 +317,7 @@ class EditableTable extends React.Component {
     });
   }
   render() {
-    console.log('render 22222');
+    // console.log('render 22222');
     const { data } = this.state;
     const dataSource = data.map((item) => {
       const obj = {};
