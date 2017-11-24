@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table,Button,Input,Popconfirm} from 'antd';
+import {Table,Input} from 'antd';
 require('./salary.css')
 
 const EditableCell = ({editable,value,onChange}) => (

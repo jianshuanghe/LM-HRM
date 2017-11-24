@@ -13,11 +13,20 @@ const formItemLayout = {
 class SalaryForm extends React.Component {
     constructor(props){
         super(props)
+        this.state = {
+            id: ''
+        }
+        this.handleInput = this.handleInput.bind(this);
+    }
+    handleInput(e){
+        this.setState({
+            id:e.target.value
+        })
     }
     search = () =>{
         this.props.form.validateFields((err,values) => {
             if(!err){
-                this.props.onSearch()
+                this.props.onSearch(this.state.id);
             }
         })
     }
@@ -40,7 +49,7 @@ class SalaryForm extends React.Component {
                         {getFieldDecorator('id',{
                             rules:[{required:true,message:'请输入员工编号！'}]
                         })(
-                        <Input onChange={this.props.onInput}/>
+                        <Input onChange={this.handleInput}/>
                         )}
                         </FormItem>
                     </Col>

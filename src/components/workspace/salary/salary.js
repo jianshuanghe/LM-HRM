@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {Form, Row, Col, Input, Button,Select} from 'antd';
 import SalaryBable from './salary-table'
 import WrappedSalaryForm from './salary-form'
 
@@ -8,12 +7,10 @@ class Salary extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            id:'',
             data:[],
             cache:[]
         };
         this.handleSearch = this.handleSearch.bind(this);
-        this.handleInput = this.handleInput.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
@@ -71,11 +68,6 @@ class Salary extends React.Component{
 
         })
     }
-    handleInput(e){
-        this.setState({
-            id:e.target.value
-        })
-    }
     handleChange(value, key, column) {
         const newData = [...this.state.data];
         const target = newData.filter(item => key === item.key)[0];
@@ -120,7 +112,7 @@ class Salary extends React.Component{
     render() {
         return (
             <div>
-                <WrappedSalaryForm onSearch={this.handleSearch} onInput={this.handleInput}/>
+                <WrappedSalaryForm onSearch={this.handleSearch}/>
                 <SalaryBable data={this.state.data} edit={this.handleEdit} change={this.handleChange} save={this.handleSave} cancel={this.handleCancel}/>
             </div>
         )
