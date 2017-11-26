@@ -14,6 +14,7 @@ import reducers from './redux/reducers'
 import Login from './components/login/login';
 import SiderBar from './components/sider/sider';
 import Logo from './common/logo/logo';
+import Head from './components/head/head';
 
 // import './common/config';
 
@@ -36,6 +37,7 @@ ReactDOM.render(
 					<Layout>
 			      <Header>
 			      	<div className="header-logo"><Logo /></div>
+			      	<Head />
 			      </Header>
 			      <Layout>
 			        <SiderBar />

@@ -2,15 +2,15 @@ import React from 'react';
 import Logo from '../../common/logo/logo.js';
 // import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { Input, Button } from 'antd';
-import {connect} from 'react-redux';
-import {login} from '../../redux/user.redux';
+import { connect } from 'react-redux';
+import { login } from '../../redux/user.redux';
 import './login.css';
 const InputGroup = Input.Group;
 
 
 @connect(
 	state => state.user,
-	{login}
+	{ login }
 )
 
 class Login extends React.Component{
@@ -34,14 +34,19 @@ class Login extends React.Component{
 	render() {
 		return (
 			<div className="login">
-				<Logo></Logo>
-				<InputGroup compact>
-		      <Input style={{ width: '50%' }} defaultValue="input content" />
-		    </InputGroup>
-				<Input placdholder="请输入用户名" />
-				<Input placdholder="请输入密码" />
-				<Button onClick={this.login} type="primary">登录</Button>
-				<Button onClick={this.regain} type="primary">找回密码</Button>
+				<div className="login-logo"><Logo></Logo></div>
+				<div className="input-container">
+					<label htmlFor="userName">用户名：</label>
+					<Input id="userName" placeholder="请输入用户名" />
+				</div>
+				<div className="input-container">
+					<label htmlFor="password">密码：</label>
+					<Input id="password" placeholder="请输入密码" />
+				</div>
+				<div className="input-container">
+					<Button onClick={this.login} type="primary" className="to-login">登录</Button>
+					<Button onClick={this.regain} type="primary" className="to-pwd">找回密码</Button>
+				</div>
 			</div>
 		)
 	}

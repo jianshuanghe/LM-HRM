@@ -1,8 +1,27 @@
+html, body{
+	height:100%;
+}
+#root{
+	width: 90%;
+	height: 100%;
+	margin: 0 auto;
+}
 .error-msg{
 	color: #f00;
 	padding-left: 10px;
 }
 .header-logo{
+	display: inline-block;
+	vertical-align: middle;
 	width: 60px;
 	height: 60px;
+}
+.header-content{
+	position: absolute;
+	display: inline-block;
+	vertical-align: middle;
+	right: 50px;
+}
+.ant-layout-header{
+	position: relative;
 }

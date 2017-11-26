@@ -2,8 +2,10 @@ import axios from 'axios';
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
+const LOGOUT = 'LOGOUT';
 
 const initState = {
+	redirectTo: '',
 	isAuth: '',
 	msg: '',
 	user: '',
@@ -17,6 +19,8 @@ export function user(state = initState, action) {
 			return {...state, msg: '', isAuth: true, ...action.data}
 		case ERROR_MSG:
 			return {...state, msg: action.msg, isAuth: false}
+		case LOGOUT:
+			return {...initState, redirectTo:'/login'}
 		default:
 			return state
 	}
