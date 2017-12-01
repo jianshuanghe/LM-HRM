@@ -1,0 +1,97 @@
+.Files{
+	position: relative;
+	width: 100%;
+	background: #fff;
+}
+.left{
+	position: relative;
+	float: left;
+}
+.clear{
+	clear: both;
+}
+ul{
+	list-style: none;
+}
+.QueryAdd {
+    position: relative;
+    width: 100%;
+    padding: 0% 2%;
+    background: #fff;
+}
+.QueryAdd .content{
+	position: relative;
+	width: 100%;
+	padding-top: 3vw;
+	padding-bottom: 3vw;
+}
+.QueryAdd .content .query{
+	position: relative;
+	width: 100%;
+}
+.inpBx-t{
+	position: relative;
+	width: 100%;
+}
+.inpBx-t .Ibx{
+	position: relative;
+	width: 100%;
+}
+.inpBx-t .Ibx .Q-bx{
+    position: relative;
+    width: 32.5%;
+}
+.inpBx{
+	position: relative;
+	width: 65%;
+}
+.inpBx .Ibx{
+	position: relative;
+	width: 100%;
+}
+.inpBx .Ibx .Q-bx{
+	position: relative;
+	width: 50%;
+}
+.Zbx{
+	position: relative;
+	width: 100%;
+}
+.Zbx .Q-p{
+	position: relative;
+	width: 15%;
+	text-align: left;
+	line-height: 33px;
+}
+.Zbx .kBx{
+	position: relative;
+	width: 60%;
+	height: 33px;
+}
+.ant-select-selection__rendered{
+	position: relative;
+	width: 60%;
+	height: 33px;
+}
+.QueryAdd .content .add{
+	position: relative;
+	width: 100%;
+	margin-top: 2vw;
+}
+.buttonBx{
+	position: relative;
+	width: 35%;
+}
+.buttonBx .BT-bx{
+	position: relative;
+	width: 100%;
+}
+.buttonBx .BT-bx .qye-bx{
+	position: relative;
+	width: 40%;
+}
+.buttonBx .BT-bx .qye-bx>button{
+	position: relative;
+	width: 60%;
+	height: 33px;
+}

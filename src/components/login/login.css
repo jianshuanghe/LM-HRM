@@ -15,10 +15,10 @@
 	width: 50%;
 	margin: 10px auto 0;
 }
-label{
+/*label{
 	display: inline-block;
 	width: 20%;
-}
+}*/
 .ant-input{
 	width: 80%;
 }
