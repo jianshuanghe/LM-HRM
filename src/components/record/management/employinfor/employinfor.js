@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Route, Link, withRouter} from 'react-router-dom';
 import axios from 'axios';
 
-// import $ from 'jquery';
+import $ from 'jquery';
 
 import './employinfor.css'
 import addressData from './city_data.js'
@@ -66,26 +66,26 @@ class EmployInfor extends React.Component {
       }
       console.log(Arr);
       console.log(EmpGraduatime,Empentrytime,Empturntime);
-      // $.ajax({
-      //   url: "http://47.95.229.11:8080/employeeInfo/findByDepartmentCode",
-      //   type: "GET",
-      //   data:Arr,
-      //   dataType: 'JSONP',
-      //   success: function(data){
-      //     console.log('chengong ')
-      //   }
-      // });
-      // axios.get('http://47.95.229.11:8080/employeeInfo/findByDepartmentCode', {
-      // 　　pageNumber:'',
-      //     pageSize: '',
-      //     hireDate: ''
-      // }).then(function (response) {
-      //     console.log(response);
-      // 　　console.log('请求成功');
-      // }).catch(function (error) {
-      // 　　console.log(error);
-      //     console.log('请求失败');
-      // })
+      $.ajax({
+        url: "http://47.95.229.11:8080/employeeInfo/findByDepartmentCode",
+        type: "GET",
+        data:Arr,
+        dataType: 'JSONP',
+        success: function(data){
+          console.log('chengong ')
+        }
+      });
+      axios.get('http://47.95.229.11:8080/employeeInfo/findByDepartmentCode', {
+      　　pageNumber:'',
+          pageSize: '',
+          hireDate: ''
+      }).then(function (response) {
+          console.log(response);
+      　　console.log('请求成功');
+      }).catch(function (error) {
+      　　console.log(error);
+          console.log('请求失败');
+      })
     });
   }
   render() {
