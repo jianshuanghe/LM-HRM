@@ -4,7 +4,7 @@ import {Route, Link, withRouter} from 'react-router-dom';
 
 import Attendance from '../workspace/attendance/attendance';
 import Vacation from '../workspace/vacation';
-import Expense from '../workspace/expense';
+// import Expense from '../workspace/expense';
 import Salary from '../workspace/salary/salary';
 // import WelfareI from '../workspace/welfarei';
 
@@ -80,12 +80,12 @@ class SiderBar extends React.Component{
 				icon:'',
 				component:Vacation,
 			},
-			{
-				path:'/workspace/expense',
-				text:'报销管理',
-				icon:'msg',
-				component:Expense
-			},
+			// {
+			// 	path:'/workspace/expense',
+			// 	text:'报销管理',
+			// 	icon:'msg',
+			// 	component:Expense
+			// },
 			{
 				path:'/workspace/salary',
 				text:'薪资核算',
