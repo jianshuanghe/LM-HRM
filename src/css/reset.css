@@ -113,7 +113,7 @@ input {
 
 /* 隐藏滚动条 */
 ::-webkit-scrollbar { width: 0; display: none;}
-input:not([type="checkbox"]), select, textarea { outline: none; border: none; -webkit-appearance: none; }
+ select, textarea { outline: none; border: none; -webkit-appearance: none; }
 
 .mask{
   position: fixed;
