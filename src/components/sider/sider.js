@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import {Route, Link, withRouter} from 'react-router-dom';
 
 import Attendance from '../workspace/attendance/attendance';
-import Vacation from '../workspace/vacation';
 // import Expense from '../workspace/expense';
+import Vacation from '../workspace/vacation/vacation';
+import Expense from '../workspace/expense';
 import Salary from '../workspace/salary/salary';
 // import WelfareI from '../workspace/welfarei';
 

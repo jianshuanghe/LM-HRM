@@ -1,0 +1,30 @@
+.ant-table-wrapper{
+position: relative;
+    width: 100%;
+    padding: 0% 2%;
+    background: #fff;
+}
+.ant-table-pagination{
+	position: relative;
+	width: 100%;
+	text-align: center;
+}
+.ant-table-thead>tr>th{
+	position: relative;
+	text-align: center;
+}
+.ant-table-thead>tr>th>span{
+	width: 100%;
+	position: relative;
+	text-align: center;
+}
+td{
+	text-align: center;
+}
+
+form{
+	position: relative;
+	width: 96%;
+	padding: 0% 2%;
+	background: #fff;
+}
