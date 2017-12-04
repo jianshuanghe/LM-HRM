@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Form, Input, Button, Select } from 'antd';
 import axios from 'axios';
+import './vacation.css';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
