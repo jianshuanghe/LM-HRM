@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Route, Link, withRouter} from 'react-router-dom';
 import axios from 'axios';
 
-import $ from 'jquery';
+// import $ from 'jquery';
 
 import './employinfor.css'
 import addressData from './city_data.js'
@@ -63,18 +63,18 @@ class EmployInfor extends React.Component {
       if(Arr.Empturntime !== undefined ){
         Empturntime = moment(Arr.Empturntime._d).format('YYYY-MM-DD'); // 转正时间
         Arr.Empturntime = Empturntime;
-      } 
+      }
       console.log(Arr);
       console.log(EmpGraduatime,Empentrytime,Empturntime);
-      $.ajax({
-        url: "http://47.95.229.11:8080/employeeInfo/findByDepartmentCode",
-        type: "GET",
-        data:Arr,
-        dataType: 'JSONP',
-        success: function(data){
-          console.log('chengong ')
-        }
-      });
+      // $.ajax({
+      //   url: "http://47.95.229.11:8080/employeeInfo/findByDepartmentCode",
+      //   type: "GET",
+      //   data:Arr,
+      //   dataType: 'JSONP',
+      //   success: function(data){
+      //     console.log('chengong ')
+      //   }
+      // });
       // axios.get('http://47.95.229.11:8080/employeeInfo/findByDepartmentCode', {
       // 　　pageNumber:'',
       //     pageSize: '',
@@ -487,7 +487,7 @@ class EmployInfor extends React.Component {
             </FormItem>
             <div className='clear'></div>
           </div>
-        </div>   
+        </div>
         <div className='Modal-Bx'>
           <div className='Title-Bx'>
             <p className='Title-p'>薪资福利信息</p>
