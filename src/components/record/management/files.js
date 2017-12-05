@@ -1,16 +1,20 @@
 import React,{ Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import {Route, Link, withRouter} from 'react-router-dom';
 
 import Detailinfor from './detailinfor/detailinfor.js'
 import Tabalstaff from './tabalstaff/tabalstaff.js'
 import EmployInfor from './employinfor/employinfor'
 
+import $ from 'jquery';
+
 import './files.css'
 
 import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 import { Form, message,Select,Input,Button } from 'antd';
 const Option = Select.Option;
+
 
 class Files extends React.Component{
 	constructor(props) {
@@ -23,41 +27,12 @@ class Files extends React.Component{
 		    jobtype: '',
 	    	isLoggedIn: true,
 	    	detailinfor:false,
-	    	key: ''
+	    	key: '',
+	    	data:[],
+            cacheData:[]
 	    };
-	    this.props={
-	    	Emp996: "3123",
-		    EmpEdutype: "01",
-		    EmpGraduatime: "",
-		    EmpHightedu: "01",
-		    EmpIDcard: "3213",
-		    EmpJobtype: "01",
-		    EmpPositional: "01",
-		    EmpRank: "01",
-		    EmpUniversity: "321313",
-		    EmpZipcode: "123213",
-		    Empaccumubase: "3123",
-		    Empdisability: "no",
-		    Empeducationhelp: "3213",
-		    Empentrytime: "",
-		    Empfoodhelp: "31231",
-		    Empgender: "male",
-		    Emphousehold: "01",
-		    Empname: "3213",
-		    Empnumber: "12321",
-		    Empnumberchildren: "1",
-		    Empother: "3123",
-		    Empotherhelp: "3213",
-		    Empovertimeallowance: "3213",
-		    Empovertimehelp: "01",
-		    Emprankhelp: "3123",
-		    Empsalary: "3213",
-		    Empsocialbase: "3123",
-		    Empturntime: "",
-		    address: ["天津市", "天津市"],
-		    upload: ''
-	    }
 	}
+
 	handle1Change(event) {
 	    this.setState({
 	      name: event.target.value
@@ -87,9 +62,155 @@ class Files extends React.Component{
 	}
 
 	handleQuery(event) {
-	    alert('查找中！！！');
-	    console.log(this.state);
 	    event.preventDefault();
+	    console.log(this.state);
+	    if (this.state.name != '' || this.state.number != '' || this.state.megn != '' || this.state.rank != '' || this.state.jobtype != '') {
+			let response = [ // 模拟数据
+		        {
+					id:1,
+					number:'1',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:2,
+					number:'2',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:3,
+					number:'3',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:4,
+					number:'4',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:5,
+					number:'5',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:6,
+					number:'6',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:7,
+					number:'7',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:8,
+					number:'8',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:9,
+					number:'9',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:10,
+					number:'10',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:11,
+					number:'11',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:12,
+					number:'12',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:13,
+					number:'13',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				},{
+					id:14,
+					number:'14',
+					name:'张三',
+					rank:'高级',
+					branch:'移动互联',
+					basicSalary: 150,
+					foodSubsidies:30
+				}
+			]
+			$.each(response,function(index,domEle){ // 为每一个数组添加一个key
+				domEle.key = index + 1;
+			});
+	        this.setState({
+	            data: response.map(item => ({...item}))
+	        });
+	        this.setState({
+	            cacheData: response.map(item => ({...item}))
+	        })
+	        let params = {
+	        	token:'f25960q0shju9avl6484om5fipvs43eo', // token标识
+	        	pageNumber: 1, //页码
+	        	pageSize: 10, // 显示条数
+	        	employeeName: this.state.name,
+			    employeeCode: this.state.number,
+			    department: this.state.megn,
+			    joblevel: this.state.rank,
+			    workingState: this.state.jobtype
+	        };
+	        console.log(params);
+	        axios.get('http://47.95.229.11:8181/employeeInfo/condition/page',{params:params})
+	        .then(function (response) {
+
+	        })
+	        .catch(function (error) {
+
+	        })
+	    } else {
+	    	alert('请输入查询条件！')
+	    }
+		    
 	}
 	handleAddClick(e) {
 		e.preventDefault();
@@ -208,10 +329,10 @@ class Files extends React.Component{
 							        </div>
 						        </div>
 				          	</div>
-				          	<Tabalstaff onDetailSubmit={this.detail.bind(this)}/>
+				          	<Tabalstaff  data={this.state.data} onDetailSubmit={this.detail.bind(this)}/>
 				        </div>)
 						:
-						(<Detailinfor data={this.props.data} onBackSubmit={this.detailBack.bind(this)}/>)
+						(<Detailinfor  onBackSubmit={this.detailBack.bind(this)}/>)
 			          }
 		          	
 		          </div>)
