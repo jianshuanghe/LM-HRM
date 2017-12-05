@@ -2,5 +2,8 @@
     margin-right: 8px;
 }
 .ant-form{
-    margin-top: 20px;
+    padding-top: 20px;
+}
+.salary-content{
+    background: #fff;
 }

@@ -13,26 +13,15 @@ const formItemLayout = {
 class SalaryForm extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
-            id: ''
-        }
-        this.handleInput = this.handleInput.bind(this);
-    }
-    handleInput(e){
-        this.setState({
-            id:e.target.value
-        })
     }
     search = () =>{
+        let {id,name,department,rank,date} = this.props.form.getFieldsValue();
+        console.log(id,name,department,rank,date);
         this.props.form.validateFields((err,values) => {
             if(!err){
-                this.props.onSearch(this.state.id);
+                this.props.onSearch(id);
             }
         })
-    }
-    change (date,dateString) {
-        console.log('data',date);
-        console.log('dateString',dateString);
     }
     render() {
         const {getFieldDecorator} = this.props.form
@@ -41,7 +30,9 @@ class SalaryForm extends React.Component {
                 <Row gutter={40}>
                     <Col span={6}>
                         <FormItem label='姓名：' {...formItemLayout}>
+                        {getFieldDecorator('name')(
                             <Input/>
+                            )}
                         </FormItem>
                     </Col>
                     <Col span={6}>
@@ -49,26 +40,31 @@ class SalaryForm extends React.Component {
                         {getFieldDecorator('id',{
                             rules:[{required:true,message:'请输入员工编号！'}]
                         })(
-                        <Input onChange={this.handleInput}/>
+                        <Input/>
                         )}
                         </FormItem>
                     </Col>
                     <Col span={6}>
-                        <RangePicker onChange = {this.change} />
+                    {getFieldDecorator('date')(
+                        <RangePicker/>
+                       )} 
                     </Col>
                 </Row>
                 <Row gutter={40}>
                     <Col span={6}>
                         <FormItem label='部门' {...formItemLayout}>
+                        {getFieldDecorator('department')(
                             <Select>
                                 <Option value='1'>技术部</Option>
                                 <Option value='2'>财务部</Option>
                                 <Option value='3'>总经办</Option>
                             </Select>
+                        )}
                         </FormItem>
                     </Col>
                     <Col span={6}>
                         <FormItem label='职级' {...formItemLayout}>
+                        {getFieldDecorator('rank')(
                             <Select>
                                 <Option value='1'>兼职</Option>
                                 <Option value='2'>F试用期</Option>
@@ -85,6 +81,7 @@ class SalaryForm extends React.Component {
                                 <Option value='13'>A2总裁</Option>
                                 <Option value='14'>A3董事长</Option>
                             </Select>
+                        )}
                         </FormItem>
                     </Col>
                     <Col span={8}>

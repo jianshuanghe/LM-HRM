@@ -77,7 +77,7 @@ class Salary extends React.Component{
             data: newData
         })
       }
-  }
+    }
     handleEdit(key){
         const newData = [...this.state.data];
         const target = newData.filter(item => key === item.key)[0];
@@ -111,7 +111,7 @@ class Salary extends React.Component{
     }
     render() {
         return (
-            <div>
+            <div className='salary-content'>
                 <WrappedSalaryForm onSearch={this.handleSearch}/>
                 <SalaryBable data={this.state.data} edit={this.handleEdit} change={this.handleChange} save={this.handleSave} cancel={this.handleCancel}/>
             </div>
