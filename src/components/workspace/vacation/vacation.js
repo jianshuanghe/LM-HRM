@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { Table, Form, Input, Button, Select } from 'antd';
+import { Table, Form, Input, Button, Select, Row, Col, DatePicker } from 'antd';
 import axios from 'axios';
 import './vacation.css';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+const formItemLayout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const RangePicker = DatePicker.RangePicker;
 
 class Holiday extends Component {
   constructor(props) {
@@ -12,16 +17,24 @@ class Holiday extends Component {
     this.state = {
       name: '郑翠翠',
       employeeId: '0002',
-      rank: 'D1',
-      beginTime: '2017-12-3',
-      endTime:'2017-12-4'
+      rank: 'C1',
+      startDate: '',
+      endDate:''
     };
 
-    this.query = this.query.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.onRangePickerChange = this.onRangePickerChange.bind(this);
   }
 
-  query () {
+  onRangePickerChange(date, dateString){
+    this.setState({startDate: dateString[0], endDate: dateString[1]});
+  }
+  handleSubmit (e) {
+    e.preventDefault();
+
+    console.log(this.state);
     let query = {
       pageNumber: 1,
       pageSize: 10
@@ -32,9 +45,13 @@ class Holiday extends Component {
       }, (response) => { console.log('失败了,why?'); });
   }
 
-  handleChange(event,dataIndex) {
-    this.setState({name: event.target.value});
-    console.log(this.state.name);
+  handleChange(event) {
+    const name = event.target.name;
+    this.setState({[name]: event.target.value});
+  }
+
+  handleSelectChange(value){
+    this.setState({rank: value});
   }
 
   render() {
@@ -82,35 +99,45 @@ class Holiday extends Component {
         dataIndex: 'operate',
       }
     ];
+
     return (
       <div className="Holiday">
-        <Form layout='inline'>
-            <FormItem  label="姓名">
-              <Input placeholder="" value={this.state.name} onChange={this.handleChange}/>
-            </FormItem>
+        <Form layout='inline' onSubmit={this.handleSubmit}>
+            <Row>
+                <Col span={7}>
+                    <FormItem  label="姓名"  {...formItemLayout}>
+                      <Input name="name" value={this.state.name} onChange={this.handleChange}/>
+                    </FormItem>
+                </Col>
+                <Col span={7}>
+                    <FormItem  label="员工编号" {...formItemLayout}>
+                      <Input type="number" name="employeeId" value={this.state.employeeId} onChange={this.handleChange}/>
+                    </FormItem>
+                </Col>
+                <Col span={7}>
+                  <FormItem label="职级" {...formItemLayout}>
+                    <Select value={this.state.rank}  onChange={this.handleSelectChange}>
+                      <Option value="A1">A1</Option>
+                      <Option value="B1">B1</Option>
+                      <Option value="C1">C1</Option>
+                      <Option value="D1">D1</Option>
+                      <Option value="D2">D2</Option>
+                      <Option value="E1">E1</Option>
+                    </Select>
+                  </FormItem>
+                </Col>
+            </Row>
 
-            <FormItem  label="员工编号">
-              <Input placeholder="" value={this.state.employeeId} onChange={this.handleChange}/>
-            </FormItem>
-
-            <FormItem label="职级">
-              <Select  style={{ width: '100%' }} value={this.state.rank} size="large">
-                <Option value="D1">D1</Option>
-                <Option value="E1">E1</Option>
-              </Select>
-            </FormItem>
-            <br/>
-            <FormItem label="开始时间">
-              <Input placeholder="" type='date' value={this.state.beginTime} onChange={this.handleChange}/>
-            </FormItem>
-
-            <FormItem label="结束时间">
-              <Input placeholder="" type='date' value={this.state.endTime} onChange={this.handleChange}/>
-            </FormItem>
-
-            <FormItem>
-              <Button type="primary" size="large" onClick={this.query}>查询</Button>
-            </FormItem>
+            <Row>
+                <Col span={7}>
+                    <FormItem  {...formItemLayout}  label="时间范围">
+                      <RangePicker onChange={this.onRangePickerChange} />
+                    </FormItem>
+                </Col>
+                <Col span={7}>
+                    <Button type="primary" htmlType="submit" style={{marginLeft:30}}  size="large">查询</Button>
+                </Col>
+            </Row>
         </Form>
         <Table
           columns={columns}
@@ -121,5 +148,5 @@ class Holiday extends Component {
     );
   }
 }
-
-export default Holiday;
+const HolidayForm = Form.create()(Holiday);
+export default HolidayForm;
