@@ -63,7 +63,7 @@ class EmployInfor extends React.Component {
       if(Arr.Empturntime !== undefined ){
         Empturntime = moment(Arr.Empturntime._d).format('YYYY-MM-DD'); // 转正时间
         Arr.Empturntime = Empturntime;
-      } 
+      }
       console.log(Arr);
       console.log(EmpGraduatime,Empentrytime,Empturntime);
       $.ajax({
@@ -75,17 +75,17 @@ class EmployInfor extends React.Component {
           console.log('chengong ')
         }
       });
-      // axios.get('http://47.95.229.11:8080/employeeInfo/findByDepartmentCode', {
-      // 　　pageNumber:'',
-      //     pageSize: '',
-      //     hireDate: ''
-      // }).then(function (response) {
-      //     console.log(response);
-      // 　　console.log('请求成功');
-      // }).catch(function (error) {
-      // 　　console.log(error);
-      //     console.log('请求失败');
-      // })
+      axios.get('http://47.95.229.11:8080/employeeInfo/findByDepartmentCode', {
+      　　pageNumber:'',
+          pageSize: '',
+          hireDate: ''
+      }).then(function (response) {
+          console.log(response);
+      　　console.log('请求成功');
+      }).catch(function (error) {
+      　　console.log(error);
+          console.log('请求失败');
+      })
     });
   }
   render() {
@@ -487,7 +487,7 @@ class EmployInfor extends React.Component {
             </FormItem>
             <div className='clear'></div>
           </div>
-        </div>   
+        </div>
         <div className='Modal-Bx'>
           <div className='Title-Bx'>
             <p className='Title-p'>薪资福利信息</p>
