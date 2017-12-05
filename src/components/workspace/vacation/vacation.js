@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
+import { Table, Form, Input, Button, Select } from 'antd';
 import axios from 'axios';
+import './vacation.css';
+
+const FormItem = Form.Item;
+const Option = Select.Option;
 
 class Holiday extends Component {
   constructor(props) {
@@ -8,15 +12,16 @@ class Holiday extends Component {
     this.state = {
       name: '郑翠翠',
       employeeId: '0002',
-      // rank: 'E1',
-
+      rank: 'D1',
+      beginTime: '2017-12-3',
+      endTime:'2017-12-4'
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.query = this.query.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleClick () {
+  query () {
     let query = {
       pageNumber: 1,
       pageSize: 10
@@ -28,88 +33,18 @@ class Holiday extends Component {
   }
 
   handleChange(event,dataIndex) {
-    console.log(event.target);
     this.setState({name: event.target.value});
     console.log(this.state.name);
   }
 
   render() {
-    // data 数组中元素的个数，决定行数
-    const data1 = [
+    const data = [
       {
         key: '1'
       }
     ];
 
-    const data2 = [
-      {
-        key: '1'
-      }
-    ];
-
-    // 标签 Column 的个数表示列数
-    const columns1 = [
-      {
-        title: '姓名',
-        dataIndex: 'name',
-        render: () => {
-          return (
-            <input type='text' value={this.state.name} onChange={this.handleChange}/>
-          )
-        }
-      },
-
-      {
-        title: '员工编号',
-        dataIndex: 'employeeId',
-        render: () => {
-          return (
-            <input type='text' value={this.state.employeeId} onChange={this.handleChange}/>
-          )
-        }
-      },
-
-      {
-        title: '职级',
-        dataIndex: 'rank',
-        render: () => {
-          return (
-            <input type='text'/>
-          )
-        }
-      },
-
-      {
-        title:"开始时间",
-        dataIndex: 'beginTime',
-        render: () => {
-          return (
-            <input type='text'/>
-          )
-        }
-      },
-
-      {
-        title:"结束时间",
-        dataIndex: 'endTime',
-        render: () => {
-          return (
-            <input type='text'/>
-          )
-        }
-      },
-
-      {
-        dataIndex: '',
-        render: () => {
-          return (
-            <button onClick={() => this.handleClick()} className='query'>查询</button>
-          )
-        }
-      }
-    ]
-
-    const columns2 = [
+    const columns = [
       {
         title: '员工编号',
         dataIndex: 'employeeId'
@@ -149,13 +84,37 @@ class Holiday extends Component {
     ];
     return (
       <div className="Holiday">
-        <Table className='table1'
-          columns={columns1}
-          dataSource={data1}
-        />
+        <Form layout='inline'>
+            <FormItem  label="姓名">
+              <Input placeholder="" value={this.state.name} onChange={this.handleChange}/>
+            </FormItem>
+
+            <FormItem  label="员工编号">
+              <Input placeholder="" value={this.state.employeeId} onChange={this.handleChange}/>
+            </FormItem>
+
+            <FormItem label="职级">
+              <Select  style={{ width: '100%' }} value={this.state.rank} size="large">
+                <Option value="D1">D1</Option>
+                <Option value="E1">E1</Option>
+              </Select>
+            </FormItem>
+            <br/>
+            <FormItem label="开始时间">
+              <Input placeholder="" type='date' value={this.state.beginTime} onChange={this.handleChange}/>
+            </FormItem>
+
+            <FormItem label="结束时间">
+              <Input placeholder="" type='date' value={this.state.endTime} onChange={this.handleChange}/>
+            </FormItem>
+
+            <FormItem>
+              <Button type="primary" size="large" onClick={this.query}>查询</Button>
+            </FormItem>
+        </Form>
         <Table
-          columns={columns2}
-          dataSource={data2}
+          columns={columns}
+          dataSource={data}
           bordered
         />
       </div>
