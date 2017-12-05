@@ -11,147 +11,6 @@ import './tabalstaff.css'
 
 import { createStore } from 'redux';
 
-
-var data = [
-		{
-			key:1,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:2,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:3,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:4,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:5,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:6,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:7,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:8,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:9,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:10,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:11,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:12,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:13,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:14,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:15,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:16,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		},{
-			key:17,
-			number:'098765432',
-			name:'张三',
-			rank:'高级',
-			branch:'移动互联',
-			basicSalary: 150,
-			foodSubsidies:30
-		}
-	];
-
 const EditableCell = ({ editable, value, onChange }) => (
   <div>
     {editable
@@ -218,8 +77,8 @@ class Tabalstaff extends React.Component{
 	        );
 	      },
 	    }];
-	    this.state = { data };
-	    this.cacheData = data.map(item => ({ ...item }));
+	    // this.setdata = { data };
+	    // this.cacheData = data.map(item => ({ ...item }));
 	  }
 	  renderColumns(text, record, column) {
 	    return (
@@ -237,7 +96,7 @@ class Tabalstaff extends React.Component{
 	    console.log(EmpNumber, ShowInfor);
 	  }
 	  handleChange(value, key, column) {
-	    const newData = [...this.state.data];
+	    const newData = [...this.props.data];
 	    const target = newData.filter(item => key === item.key)[0];
 	    if (target) {
 	      target[column] = value;
@@ -246,7 +105,7 @@ class Tabalstaff extends React.Component{
 	  }
 
 	  edit(key) {
-	    const newData = [...this.state.data];
+	    const newData = [...this.props.data];
 	    const target = newData.filter(item => key === item.key)[0];
 	    if (target) {
 	      target.editable = true;
@@ -254,7 +113,7 @@ class Tabalstaff extends React.Component{
 	    }
 	  }
 	  save(key) {
-	    const newData = [...this.state.data];
+	    const newData = [...this.props.data];
 	    const target = newData.filter(item => key === item.key)[0];
 	    if (target) {
 	      delete target.editable;
@@ -263,7 +122,7 @@ class Tabalstaff extends React.Component{
 	    }
 	  }
 	  cancel(key) {
-	    const newData = [...this.state.data];
+	    const newData = [...this.props.data];
 	    const target = newData.filter(item => key === item.key)[0];
 	    if (target) {
 	      Object.assign(target, this.cacheData.filter(item => key === item.key)[0]);
@@ -272,7 +131,7 @@ class Tabalstaff extends React.Component{
 	  }
 	}
 	render() {
-    	return <Table bordered dataSource={this.state.data} columns={this.columns} />;
+    	return <Table bordered dataSource={this.props.data} columns={this.columns} />;
   	}
 }
 
