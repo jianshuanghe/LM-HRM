@@ -112,8 +112,8 @@ input {
 }
 
 /* 隐藏滚动条 */
-::-webkit-scrollbar { width: 0; display: none;}
- select, textarea { outline: none; border: none; -webkit-appearance: none; }
+/*::-webkit-scrollbar { width: 0; display: none;}
+ select, textarea { outline: none; border: none; -webkit-appearance: none; }*/
 
 .mask{
   position: fixed;
