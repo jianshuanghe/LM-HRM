@@ -1,9 +1,20 @@
-.editable-row-operations a{
+.salary-content .editable-row-operations a{
     margin-right: 8px;
 }
-.ant-form{
+.salary-content .ant-form{
     padding-top: 20px;
 }
 .salary-content{
     background: #fff;
 }
+#canvas{
+    display: none;
+}
+.salary-content .ant-modal-body{
+    padding: 0
+}
+.salary-content .ant-modal-close{
+    position: absolute;
+    top: -40px;
+    color: #fff;
+ }

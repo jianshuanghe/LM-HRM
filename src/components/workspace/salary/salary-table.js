@@ -1,6 +1,5 @@
 import React from 'react';
 import {Table,Input,Popconfirm} from 'antd';
-import './salary.css'
 
 const EditableCell = ({editable,value,onChange}) => (
   <div>
@@ -10,12 +9,6 @@ const EditableCell = ({editable,value,onChange}) => (
   }
   </div>
   )
-
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys:${selectedRowKeys}`,'selectedRows:',selectedRows);
-  }
-}
 
 class SalaryTable extends React.Component{
   constructor(props){
@@ -104,13 +97,19 @@ class SalaryTable extends React.Component{
         }
     }];
   }
+  rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+    this.props.rowSelection(selectedRows);
+    console.log(`selectedRowKeys:${selectedRowKeys}`,'selectedRows:',selectedRows);
+      }
+  }
   renderColumns(text,record,column) {
     return <EditableCell value={text} editable={record.editable} onChange={value=>this.props.change(value,record.key,column)}></EditableCell>
   }
 
   render() {
       return (
-          <Table columns={this.columns} dataSource={this.props.data} rowSelection={rowSelection} scroll={{x:1800}}/>
+          <Table columns={this.columns} dataSource={this.props.data} rowSelection={this.rowSelection} scroll={{x:1800}}/>
       )
   }
 }

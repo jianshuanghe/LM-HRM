@@ -2,24 +2,32 @@ import React from 'react';
 import axios from 'axios';
 import SalaryBable from './salary-table'
 import WrappedSalaryForm from './salary-form'
+import {Modal} from 'antd'
+import './salary.css'
 
 class Salary extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            isModealShow: false,
+            imgSrc: '',
             data:[],
-            cache:[]
+            cache:[],
+            rowSelection:[]
         };
+        this.selected = []
         this.handleSearch = this.handleSearch.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
+        this.snapshot = this.snapshot.bind(this);
+        this.rowSelection = this.rowSelection.bind(this);
     }
     handleSearch(){
         let response = [{
                           key: '1',
-                          id: '12345',
+                          id: '1',
                           name: 32,
                           rank: '员工',
                           department: '技术部',
@@ -37,7 +45,7 @@ class Salary extends React.Component{
                           state: '离职'
                         },{
                           key: '2',
-                          id: '12345',
+                          id: '2',
                           name: 32,
                           rank: '员工',
                           department: '技术部',
@@ -96,9 +104,9 @@ class Salary extends React.Component{
       this.setState({
         data: newData,
         cache: newData.map(item => ({...item}))
-    })
-  }
-}
+        })
+      }
+    }
     handleCancel(key){
         console.log('cache',this.state.cache);
         const newData = [...this.state.data];
@@ -109,11 +117,70 @@ class Salary extends React.Component{
             this.setState({data:newData});
         }  
     }
+    rowSelection(selected){
+        let data = []
+        if (selected.length > 0) {
+            let props = Object.keys(selected[0]);
+            props = props.filter(function(ele){
+                return ele !== 'key' && ele !== 'state'
+            })
+            data = selected.map(function(value){
+                let res = []
+                for (let i = 0; i < props.length; i++){
+                    res.push(value[props[i]])
+                }
+                return res
+            })
+        }
+        this.selected = data
+    }
+    snapshot(){
+        let title = ['员工编号', '姓名', '职级', '部门', '饭补', '学历补助', '职称补助', '其他补助', '加班薪资', '考勤扣除', '五险', '公积金', '个人所得税', '实际发放金额'];
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        canvas.height = (this.selected.length + 1) * 50 + 20;
+        canvas.width = 1200;
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = '#000';
+        ctx.textAlign="center";
+        ctx.fillText('test', 20, 20);
+        for (let i = 0; i < this.selected.length + 2; i++) {
+            ctx.moveTo(5, 10 + i * 50)
+            ctx.lineTo(1195, 10 + i * 50)
+        }
+        for (let j = 0; j < title.length + 1 ; j++) {
+            ctx.moveTo(5 + j * (1190 / title.length), 10)
+            ctx.lineTo(5 + j * (1190 / title.length), 10 + (this.selected.length + 1) * 50)
+        }
+        ctx.stroke();
+        ctx.fillStyle = '#000';
+        ctx.font = 'bold 12px 宋体';
+        for (let k = 0; k < this.selected.length + 1; k++) {
+            for (let m = 0; m < title.length; m++) {
+                if (k === 0) {
+                    ctx.fillText(title[m], (1190 / title.length)/2 + m * (1190 / title.length) + 5, 40)
+                } else {
+                    ctx.fillText(this.selected[k-1][m], (1190 / title.length)/2 + m * (1190 / title.length) + 5, 40 + k * 50)
+                }
+            }
+        }
+        this.setState({
+               imgSrc: canvas.toDataURL('image/jpeg'),
+               isModealShow: true
+        })
+    }
     render() {
         return (
             <div className='salary-content'>
-                <WrappedSalaryForm onSearch={this.handleSearch}/>
-                <SalaryBable data={this.state.data} edit={this.handleEdit} change={this.handleChange} save={this.handleSave} cancel={this.handleCancel}/>
+                <WrappedSalaryForm onSearch={this.handleSearch} snapshot snapshot={this.snapshot}/>
+                <SalaryBable rowSelection={this.rowSelection} data={this.state.data} edit={this.handleEdit} change={this.handleChange} save={this.handleSave} cancel={this.handleCancel}/>
+                <Modal visible={this.state.isModealShow} width={1200} footer={null} onCancel={()=>{this.setState({isModealShow: false})}} getContainer={()=>document.querySelector('.modal')}>
+                    <img src={this.state.imgSrc}/>
+                </Modal>
+                <canvas id='canvas'></canvas>
+                <div className='modal'></div>
             </div>
         )
     }

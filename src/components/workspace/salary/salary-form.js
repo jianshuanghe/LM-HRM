@@ -86,7 +86,7 @@ class SalaryForm extends React.Component {
                     </Col>
                     <Col span={8}>
                         <Button onClick={this.search}>查询</Button>
-                        <Button>生成工资条</Button>
+                        <Button onClick={()=>this.props.snapshot()}>生成工资条</Button>
                         <Button>邮件通知</Button>
                     </Col>
                 </Row>
