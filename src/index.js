@@ -10,7 +10,7 @@ import './css/index.css';
 
 import reducers from './redux/reducers'
 
-// import IsLogin from './common/islogin/islogin';
+import IsLogin from './common/islogin/islogin';
 import Login from './components/login/login';
 import SiderBar from './components/sider/sider';
 import Logo from './common/logo/logo';
@@ -31,8 +31,8 @@ ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<div>
+				{/*<IsLogin></IsLogin>*/}
 				<Switch>
-					{/*<IsLogin></IsLogin>*/}
 					<Route path="/login" exact component={Login}></Route>
 					<Layout>
 			      <Header>
