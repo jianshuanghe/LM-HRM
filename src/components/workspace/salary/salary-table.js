@@ -99,7 +99,7 @@ class SalaryTable extends React.Component{
   }
   rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-    this.props.rowSelection(selectedRows);
+    this.props.rowSelection(selectedRowKeys);
     console.log(`selectedRowKeys:${selectedRowKeys}`,'selectedRows:',selectedRows);
       }
   }

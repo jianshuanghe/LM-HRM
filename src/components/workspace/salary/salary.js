@@ -15,7 +15,8 @@ class Salary extends React.Component{
             cache:[],
             rowSelection:[]
         };
-        this.selected = []
+        this.selectedRowKeys = [];
+        this.selected = [];
         this.handleSearch = this.handleSearch.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -26,9 +27,9 @@ class Salary extends React.Component{
     }
     handleSearch(){
         let response = [{
-                          key: '1',
+                          key: '0',
                           id: '1',
-                          name: 32,
+                          name: '姓名1',
                           rank: '员工',
                           department: '技术部',
                           baseSalary: 1234,
@@ -43,25 +44,261 @@ class Salary extends React.Component{
                           tax: 1234,
                           actualAmount: 1234,
                           state: '离职'
-                        },{
-                          key: '2',
-                          id: '2',
-                          name: 32,
-                          rank: '员工',
-                          department: '技术部',
-                          baseSalary: 1234,
-                          mealAllowance: 1234,
-                          academicSubsidy: 1234,
-                          titleSubsidy: 1234,
-                          otherSubsidies: 1234,
-                          overtimePay: 1234,
-                          attendanceDeduction: 1234,
-                          fiveInsurances: 1234,
-                          accumulationFund: 1234,
-                          tax: 1234,
-                          actualAmount: 1234,
-                          state:'在职'
-                        }]
+                         }
+                        //,{
+                        //   key: '1',
+                        //   id: '1',
+                        //   name: '姓名2',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state: '离职'
+                        // },{
+                        //   key: '2',
+                        //   id: '2',
+                        //   name: '姓名3',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state:'在职'
+                        // },{
+                        //   key: '3',
+                        //   id: '1',
+                        //   name: '姓名4',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state: '离职'
+                        // },{
+                        //   key: '4',
+                        //   id: '2',
+                        //   name: '姓名5',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state:'在职'
+                        // },{
+                        //   key: '5',
+                        //   id: '1',
+                        //   name: '姓名6',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state: '离职'
+                        // },{
+                        //   key: '6',
+                        //   id: '2',
+                        //   name: '姓名7',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state:'在职'
+                        // },{
+                        //   key: '7',
+                        //   id: '1',
+                        //   name: '姓名8',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state: '离职'
+                        // },{
+                        //   key: '8',
+                        //   id: '2',
+                        //   name: '姓名9',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state:'在职'
+                        // },{
+                        //   key: '9',
+                        //   id: '1',
+                        //   name: '姓名10',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state: '离职'
+                        // },{
+                        //   key: '10',
+                        //   id: '2',
+                        //   name: '姓名11',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state:'在职'
+                        // },{
+                        //   key: '11',
+                        //   id: '1',
+                        //   name: '姓名12',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state: '离职'
+                        // },{
+                        //   key: '12',
+                        //   id: '2',
+                        //   name: '姓名13',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state:'在职'
+                        // },{
+                        //   key: '13',
+                        //   id: '1',
+                        //   name: '姓名14',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state: '离职'
+                        // },{
+                        //   key: '14',
+                        //   id: '2',
+                        //   name: '姓名1',
+                        //   rank: '员工',
+                        //   department: '技术部',
+                        //   baseSalary: 1234,
+                        //   mealAllowance: 1234,
+                        //   academicSubsidy: 1234,
+                        //   titleSubsidy: 1234,
+                        //   otherSubsidies: 1234,
+                        //   overtimePay: 1234,
+                        //   attendanceDeduction: 1234,
+                        //   fiveInsurances: 1234,
+                        //   accumulationFund: 1234,
+                        //   tax: 1234,
+                        //   actualAmount: 1234,
+                        //   state:'在职'
+                        // }
+                        ]
         this.setState({
             data: response.map(item => ({...item}))
         });
@@ -117,7 +354,15 @@ class Salary extends React.Component{
             this.setState({data:newData});
         }  
     }
-    rowSelection(selected){
+    rowSelection(selectedRowKeys){
+        this.selectedRowKeys = selectedRowKeys
+    }
+    snapshot(){
+        let selected = [];
+        for (let i = 0; i < this.selectedRowKeys.length; i++) {
+            selected.push(this.state.cache[this.selectedRowKeys[i]])
+        }
+        console.log('selected', selected)
         let data = []
         if (selected.length > 0) {
             let props = Object.keys(selected[0]);
@@ -132,10 +377,8 @@ class Salary extends React.Component{
                 return res
             })
         }
-        this.selected = data
-    }
-    snapshot(){
-        let title = ['员工编号', '姓名', '职级', '部门', '饭补', '学历补助', '职称补助', '其他补助', '加班薪资', '考勤扣除', '五险', '公积金', '个人所得税', '实际发放金额'];
+        this.selected = data;
+        let title = ['员工编号', '姓名', '职级', '部门','基本薪资' ,'饭补', '学历补助', '职称补助', '其他补助', '加班薪资', '考勤扣除', '五险', '公积金', '个人所得税', '实际发放金额'];
         let canvas = document.getElementById('canvas');
         let ctx = canvas.getContext('2d');
         canvas.height = (this.selected.length + 1) * 50 + 20;
@@ -157,11 +400,13 @@ class Salary extends React.Component{
         ctx.stroke();
         ctx.fillStyle = '#000';
         ctx.font = 'bold 12px 宋体';
+        console.log(this.selected);
         for (let k = 0; k < this.selected.length + 1; k++) {
             for (let m = 0; m < title.length; m++) {
                 if (k === 0) {
                     ctx.fillText(title[m], (1190 / title.length)/2 + m * (1190 / title.length) + 5, 40)
                 } else {
+                    console.log(this.selected[k-1][m]);
                     ctx.fillText(this.selected[k-1][m], (1190 / title.length)/2 + m * (1190 / title.length) + 5, 40 + k * 50)
                 }
             }
