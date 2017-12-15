@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
+import MediaQuery from 'react-responsive';
 
 import './css/reset.css';
 import './css/index.css';
@@ -15,6 +16,8 @@ import Login from './components/login/login';
 import SiderBar from './components/sider/sider';
 import Logo from './common/logo/logo';
 import Head from './components/head/head';
+
+import Home from './mobile/home'
 
 // import './common/config';
 
@@ -31,20 +34,29 @@ ReactDOM.render(
 	<Provider store={store}>
 		<BrowserRouter>
 			<div>
-				{/*<IsLogin></IsLogin>*/}
-				<Switch>
-					<Route path="/login" exact component={Login}></Route>
-					<Layout>
-			      <Header>
-			      	<div className="header-logo"><Logo /></div>
-			      	<Head />
-			      </Header>
-			      <Layout>
-			        <SiderBar />
-			      </Layout>
-			      <Footer>Footer</Footer>
-			    </Layout>
-		    </Switch>
+				<IsLogin></IsLogin>
+				<MediaQuery query = "(min-device-width: 1000px)">
+					<Switch>
+						<Route path="/login" exact component={Login}></Route>
+						<Layout>
+				      <Header>
+				      	<div className="header-logo"><Logo /></div>
+				      	<Head />
+				      </Header>
+				      <Layout>
+				        <SiderBar />
+				      </Layout>
+				      <Footer>Footer</Footer>
+				    </Layout>
+			    </Switch>
+				</MediaQuery>
+				<MediaQuery query = "(max-device-width: 1000px)">
+					<Switch>
+						<Route path="/login" exact component={Login}></Route>
+						<Route component={Home}></Route>
+			    </Switch>
+				</MediaQuery>
+
 			</div>
 		</BrowserRouter>
 	</Provider>
