@@ -16,22 +16,10 @@ class AuthRoute extends React.Component{
 			return null;
 		}
 
-		axios.get('/user/info')
-			.then(res => {
-				if (res.status === 200) {
-					console.log(res.data);
-					if (res.data.code === 0) {
-						console.log('已登录');
-					} else {
-						console.log('未登录');
-						this.props.history.push('/login');
-						console.log(this.props.history);
-					}
-				}
-			}, res => {
-				console.log('调用失败');
-				// this.props.history.push('/login');
-			})
+		if (sessionStorage.getItem('token') === null || sessionStorage.getItem('token') === undefined) {
+			console.log('nosession');
+			this.props.history.push('/login');
+		}
 	}
 
 	render() {

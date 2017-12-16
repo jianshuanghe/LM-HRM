@@ -8,15 +8,15 @@ const initState = {
 	redirectTo: '',
 	isAuth: '',
 	msg: '',
-	user: '',
-	pwd: '',
+	username: '',
+	password: '',
 	type: ''
 }
 
 export function user(state = initState, action) {
 	switch(action.type){
 		case LOGIN_SUCCESS:
-			return {...state, msg: '', isAuth: true, ...action.data}
+			return {...state, msg: '', redirectTo:'/', isAuth: true, ...action.data}
 		case ERROR_MSG:
 			return {...state, msg: action.msg, isAuth: false}
 		case LOGOUT:
@@ -33,17 +33,25 @@ function errorMsg(msg) {
 	}
 }
 
-export function login({user, pwd}) {
-	if (!user || !pwd) {
+export function login({username, password}) {
+	if (!username || !password) {
 		return errorMsg('用户密码必须输入');
 	}
 
+	let appId = '1';
+	let params = {};
+	params.appId = '1';
+	params.username = username;
+	params.password = password;
+
 	return dispatch => {
-		axios.post('/user/login', {user, pwd})
+		axios.post('/server1/employeeInfo/login', params)
 			.then(res => {
-				if (res.status === 200 && res.data.code === 0) {
+				if (res.status === 200) {
 					console.log('登录成功');
-					dispatch(loginSuccess(res.data.data));
+					console.log(res);
+					console.log(res.data);
+					dispatch(loginSuccess(res.data));
 				} else {
 					console.log('登录失败');
 					dispatch(errorMsg(res.data.msg));
@@ -53,6 +61,10 @@ export function login({user, pwd}) {
 }
 
 function loginSuccess(data) {
+	console.log(typeof data);
+	console.log(data.token);
+	sessionStorage.setItem('token', data);
 	return {type: LOGIN_SUCCESS, data: data}
 }
+
 
