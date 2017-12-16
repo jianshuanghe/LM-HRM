@@ -190,7 +190,8 @@ class Files extends React.Component{
 	            cacheData: response.map(item => ({...item}))
 	        })
 	        let params = {
-	        	token:'f25960q0shju9avl6484om5fipvs43eo', // token标识
+	        	token:'8g2c92m2pdqhrr9e890liujaont5qpk0', // token标识
+	        	id: "5a1ab8e44c1e651d20b01172",
 	        	pageNumber: 1, //页码
 	        	pageSize: 10, // 显示条数
 	        	employeeName: this.state.name,
@@ -200,7 +201,7 @@ class Files extends React.Component{
 			    workingState: this.state.jobtype
 	        };
 	        console.log(params);
-	        axios.get('http://47.95.229.11:8181/employeeInfo/condition/page',{params:params})
+	        axios.get('/employeeInfo/condition/page',{params:params})
 	        .then(function (response) {
 
 	        })
