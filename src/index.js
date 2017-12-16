@@ -17,12 +17,8 @@ import SiderBar from './components/sider/sider';
 import Logo from './common/logo/logo';
 import Head from './components/head/head';
 
-import NavBar from './mobile/navbar/navbar'
-import Home from './mobile/home/home'
-import VacationM from './mobile/vacation/vacation'
-import OrganizationM from './mobile/organization/organization'
-import Personal from './mobile/personal/personal'
-khskdjhfksdjhfks
+import Home from './mobile/home'
+
 // import './common/config';
 
 import {Layout} from 'antd';
@@ -57,7 +53,7 @@ ReactDOM.render(
 				<MediaQuery query = "(max-device-width: 1000px)">
 					<Switch>
 						<Route path="/login" exact component={Login}></Route>
-						<Route path="/" component={NavBar}></Route>
+						<Route component={Home}></Route>
 			    </Switch>
 				</MediaQuery>
 
