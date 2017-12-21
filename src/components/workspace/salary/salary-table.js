@@ -15,38 +15,44 @@ class SalaryTable extends React.Component{
     super(props);
     this.columns = [{
         title: '员工编号',
-        dataIndex: 'id',
+        dataIndex: 'employeeCode',
         width: 80,
         fixed: 'left'
     },{
         title: '姓名',
-        dataIndex: 'name',
+        dataIndex: 'employeeName',
         width: 80,
         fixed: 'left'
     },{
+        title: '日期',
+        dataIndex: 'date'
+    },{
         title: '职级',
-        dataIndex: 'rank',
+        dataIndex: 'joblevel',
     },{
         title: '部门',
-        dataIndex: 'department',
+        dataIndex: 'departmentName',
     },{
         title: '基本薪资',
         dataIndex: 'baseSalary',
     },{
         title: '饭补',
-        dataIndex: 'mealAllowance',
+        dataIndex: 'foodSubsidy',
     },{
         title: '学历补助',
-        dataIndex: 'academicSubsidy',
-        render: (text,record) => this.renderColumns(text,record,'academicSubsidy'),
+        dataIndex: 'educationSubsidy',
+        render: (text,record) => this.renderColumns(text,record,'educationSubsidy'),
     },{
         title: '职称补助',
-        dataIndex: 'titleSubsidy',
-        render: (text,record) => this.renderColumns(text,record,'titleSubsidy'),
+        dataIndex: 'jobtitleSubsidy',
+        render: (text,record) => this.renderColumns(text,record,'jobtitleSubsidy'),
     },{
         title: '其他补助',
-        dataIndex: 'otherSubsidies',
+        dataIndex: 'otherSubsidy',
         render: (text,record) => this.renderColumns(text,record,'otherSubsidies'),
+    },{
+        title: '其他扣除',
+        dataIndex: 'otherDeduction'
     },{
         title: '加班薪资',
         dataIndex: 'overtimePay',
@@ -56,23 +62,24 @@ class SalaryTable extends React.Component{
         render: (text,record) => this.renderColumns(text,record,'attendanceDeduction'),
     },{
         title: '五险',
-        dataIndex: 'fiveInsurances',
-        render: (text,record) => this.renderColumns(text,record,'fiveInsurances'),
+        dataIndex: 'insuranceDeduction',
+        render: (text,record) => this.renderColumns(text,record,'insuranceDeduction'),
     },{
         title: '公积金',
-        dataIndex: 'accumulationFund',
-        render: (text,record) => this.renderColumns(text,record,'accumulationFund'),
+        dataIndex: 'providentFundDeduction',
+        render: (text,record) => this.renderColumns(text,record,'providentFundDeduction'),
     },{
         title: '个人所得税',
         dataIndex: 'tax',
         render: (text,record) => this.renderColumns(text,record,'tax'),
     },{
         title: '实际发放金额',
-        dataIndex: 'actualAmount',
-        render: (text,record) => this.renderColumns(text,record,'actualAmount'),
+        dataIndex: 'totalSalary',
+        render: (text,record) => this.renderColumns(text,record,'totalSalary'),
     },{
         title: '状态',
-        dataIndex: 'state',
+        dataIndex: 'workingState',
+        render: (text) => {return text === '01' ? '在职' : '离职'} // todo! 确定代表值
     },{
         title: '操作',
         dataIndex: 'action',

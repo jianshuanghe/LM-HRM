@@ -16,10 +16,11 @@ class SalaryForm extends React.Component {
     }
     search = () =>{
         let {id,name,department,rank,date} = this.props.form.getFieldsValue();
-        console.log(id,name,department,rank,date);
+        let condition = {id,name,department,rank,date}; // todo!目前接口入参未定
+        console.log('查询条件', condition);
         this.props.form.validateFields((err,values) => {
             if(!err){
-                this.props.onSearch(id);
+                this.props.onSearch(condition);
             }
         })
     }
@@ -37,9 +38,7 @@ class SalaryForm extends React.Component {
                     </Col>
                     <Col span={6}>
                         <FormItem label='员工编号：' {...formItemLayout}>
-                        {getFieldDecorator('id',{
-                            rules:[{required:true,message:'请输入员工编号！'}]
-                        })(
+                        {getFieldDecorator('id')(
                         <Input/>
                         )}
                         </FormItem>

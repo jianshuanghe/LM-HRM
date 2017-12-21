@@ -6,11 +6,10 @@ const baseUrl = 'http://47.95.229.11:8080';
 module.exports = function (req, res, next) {
 
 	const path = req.path;
-
 	axios(`${baseUrl}${path}`, {
 		method: req.method,
 		params: req.query,
-		data: querystring.stringify(req.body)
+		data: req.body
 	}).then(resp => {
 		if (resp.status === 200) {
 			res.send(resp.data)
