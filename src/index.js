@@ -17,7 +17,11 @@ import SiderBar from './components/sider/sider';
 import Logo from './common/logo/logo';
 import Head from './components/head/head';
 
-import Home from './mobile/home'
+import Container from './mobile/container/container';
+import Home from './mobile/home/home';
+import VacationM from './mobile/vacation/vacation';
+import OrganizationM from './mobile/organization/organization';
+import Personal from './mobile/personal/personal';
 
 // import './common/config';
 
@@ -43,9 +47,7 @@ ReactDOM.render(
 				      	<div className="header-logo"><Logo /></div>
 				      	<Head />
 				      </Header>
-				      <Layout>
 				        <SiderBar />
-				      </Layout>
 				      <Footer>Footer</Footer>
 				    </Layout>
 			    </Switch>
@@ -53,10 +55,10 @@ ReactDOM.render(
 				<MediaQuery query = "(max-device-width: 1000px)">
 					<Switch>
 						<Route path="/login" exact component={Login}></Route>
-						<Route component={Home}></Route>
-			    </Switch>
+						<Route component={Container}></Route>
+						{/*<Container />*/}
+					</Switch>
 				</MediaQuery>
-
 			</div>
 		</BrowserRouter>
 	</Provider>

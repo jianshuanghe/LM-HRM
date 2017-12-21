@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Home extends React.Component{
+class Vacation extends React.Component{
 
 	constructor(props) {
 		super(props);
@@ -8,11 +8,11 @@ class Home extends React.Component{
 
 	render() {
 		return (
-			<div className="header-content">
-				移动端首页
+			<div>
+				移动端假期
 			</div>
 		)
 	}
 }
 
-export default Home;
+export default Vacation;
