@@ -30,7 +30,7 @@ class Salary extends React.Component{
         axios.post('/server0/salarySheet/query') // todo! 传入参数condition没有定
         .then(function (response) {
             console.log('查询suc', response);
-            if (response.state === 200) {
+            if (response.status === 200) {
                 let res = response.data;
                 res.forEach((item,index) => (item.key = index + ''));
                 _this.setState({
