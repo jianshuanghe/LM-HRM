@@ -1,0 +1,72 @@
+.personal-head{
+	height: 25vh;
+    background-color: #faa;
+    text-align: center;
+}
+.head-img{
+	display: inline-block;
+    width: 19vw;
+    height: 11vh;
+    border-radius: 50%;
+    margin-top: 3vh;
+}
+.personal-con{
+	margin-top: 2.5vh;
+}
+.personal-con ul{
+
+}
+.personal-con li{
+	height: 7vh;
+    line-height: 7vh;
+    border-top: 1px solid #D9D9D9;
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 1vh;
+    background: #fff;
+    padding-left: 10vw;
+}
+.personal-con li i{
+	display:inline-block;
+	width: 16px;
+	height: 16px;
+	
+	margin-right: 2vw;
+    vertical-align: middle;
+}
+.personal-con li:nth-child(1) i{
+	background: url(./img/personal.png) no-repeat center center;
+}
+.personal-con li:nth-child(2) i{
+	background: url(./img/post.png) no-repeat center center;
+}
+.personal-con li:nth-child(3) i{
+	background: url(./img/payment.png) no-repeat center center;
+}
+.personal-con li span{
+	display: inline-block;
+	width: 75vw;
+}
+.personal-con li b{
+	display: inline-block;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    height: 10px;
+    width: 10px;
+    border-width: 2px 2px 0 0;
+    border-color: #C8C8CD;
+    border-style: solid;
+    position: relative;
+    top: -2px;
+    top: -1px;
+    margin-left: .3em;
+}
+.personal-foot{
+	margin-top: 3vh;
+    height: 7vh;
+    line-height: 7vh;
+    text-align: center;
+    background: #fff;
+}
+.personal-foot span{
+	color: #ff5b5b;
+}
