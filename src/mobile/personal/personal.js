@@ -1,6 +1,7 @@
 import React from 'react';
-import portrait from './img/portrait.png'
+import { Button,NavBar, Icon } from 'antd-mobile';
 import './personal.css';
+
 class Personal extends React.Component{
 
 	constructor(props) {
@@ -11,7 +12,7 @@ class Personal extends React.Component{
 		return (
 			<div>
 				<div className="personal-head">
-					<img className="head-img" src={portrait} />
+					<img className="head-img" src={require('./img/portrait.png')} />
 					<p>JAVA工程师</p>
 					<p>工号：<b>LMBD-0001</b></p>
 				</div>
@@ -34,9 +35,7 @@ class Personal extends React.Component{
 						</li>
 					</ul>
 				</div>
-				<div className="personal-foot">
-					<span>退出登录</span>
-				</div>
+				<Button className="personal-foot">退出登录</Button>
 			</div>
 		)
 	}
