@@ -90,14 +90,15 @@ class Container extends React.Component{
 				}
 			];
 		const { pathname } = this.props.location;
-		
+		console.log(this.props);
+
 		return (
 			<div className="mobile-container">
 				<div className="mobile-header">
 					<NavBar
 				      mode="light"
 				      icon={<Icon type="left" />}
-				      onLeftClick={() => console.log('onLeftClick')}
+				      onLeftClick={() => {window.history.back();}}
 				      rightContent={<Popover mask
 			            overlayClassName="fortest"
 			            overlayStyle={{ color: 'currentColor' }}
@@ -129,8 +130,6 @@ class Container extends React.Component{
 			          </Popover>}>
 			          HRM
 			        </NavBar>
-					
-					
 				</div>
 				<div className="mobile-page">
 					{navList.map( r => (
@@ -139,7 +138,7 @@ class Container extends React.Component{
 					{homeList.map( r => (
 						<Route key={r.path} path={r.path} component={r.component} className="mobile-page"></Route>
 					))}
-				</div>	
+				</div>
 				<div className="mobile-nav">
 					<TabBar>
 				        {navList.map(v => (
@@ -156,9 +155,9 @@ class Container extends React.Component{
 									</TabBar.Item>
 				        ))}
 				    </TabBar>
-						
+
 				</div>
-				
+
 			</div>
 		)
 	}

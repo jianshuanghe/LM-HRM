@@ -1,7 +1,7 @@
-#vacation{
+/*#vacation{
     overflow: auto;
     height: 565px;
-}
+}*/
 form{
     width: 100%;
 }
@@ -10,10 +10,10 @@ form{
     flex-basis: 50%;
 }
 .btnGroup{
-    position: fixed;
+    /*position: fixed;*/
     width: 100%;
-    bottom: 0;
-    z-index: 100;
+    /*bottom: 0;*/
+    /*z-index: 100;*/
     background-color: rgba(255,255,255,0.5);
     float: right;
 }
