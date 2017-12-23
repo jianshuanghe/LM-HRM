@@ -2,10 +2,16 @@ import React from 'react';
 import { DatePicker, Input, Select, Upload, message, Button, Icon } from 'antd';
 // import AttendanceTable from './attendance-table';
 import EditableTable from './attendance-table';
+import { connect } from 'react-redux';
 import axios from 'axios';
-import './attendance.css'
+import './attendance.css';
 const { RangePicker } = DatePicker;
 const Option = Select.Option;
+
+@connect(
+	state => state.user
+)
+
 
 class Attendance extends React.Component{
 
@@ -33,6 +39,8 @@ class Attendance extends React.Component{
 
 	componentDidMount() {
 	  console.log('componentDidMount attendance');
+	  console.log(this.state);
+	  console.log(this.props);
 	  // this.query();
 	}
 
@@ -63,8 +71,8 @@ class Attendance extends React.Component{
 					test.name = rdc[i].departmentName;
 					test.rank = rdc[i].dr;
 					test.department = rdc[i].departmentCode;
-					console.log('test');
-					console.log(test);
+					// console.log('test');
+					// console.log(test);
 					testt[i] = test;
 				}
 				console.log('testt');
@@ -101,19 +109,17 @@ class Attendance extends React.Component{
 
 	render() {
 		const uploadCfg = {
-		  name: 'file',
-		  action: '//jsonplaceholder.typicode.com/posts/',
-		  headers: {
-		    authorization: 'authorization-text',
-		  },
+		  name: 'filedata',
+		  action: '/server0/file/uploadFile',
 		  onChange(info) {
+		  	console.log(info);
 		    if (info.file.status !== 'uploading') {
 		      console.log(info.file, info.fileList);
 		    }
 		    if (info.file.status === 'done') {
-		      message.success(`${info.file.name} file uploaded successfully`);
+		      message.success(`${info.file.name} 上传成功`);
 		    } else if (info.file.status === 'error') {
-		      message.error(`${info.file.name} file upload failed.`);
+		      message.error(`${info.file.name} 上传失败`);
 		    }
 		  },
 		};
@@ -135,7 +141,7 @@ class Attendance extends React.Component{
 	        <Button type="primary" onClick={this.query}>查询</Button>
 	        <Upload {...uploadCfg}>
 	           <Button>
-	             <Icon type="upload" /> Click to Upload
+	             <Icon type="upload" /> 考勤导入
 	           </Button>
 	         </Upload>
 	        <Button type="primary">模板下载</Button>
