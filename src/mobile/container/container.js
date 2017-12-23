@@ -91,12 +91,10 @@ class Container extends React.Component{
     ]
 
 		const { pathname } = this.props.location;
+		
 		return (
 			<div className="mobile-container">
-				<div className="mobile-nav">
-				{homeList.map( r => (
-					<Route key={r.path} path={r.path} component={r.component} className="mobile-page"></Route>
-				))}
+				<div className="mobile-header">
 					<NavBar
 				      mode="light"
 				      icon={<Icon type="left" />}
@@ -132,6 +130,18 @@ class Container extends React.Component{
 			          </Popover>}>
 			          HRM
 			        </NavBar>
+					
+					
+				</div>
+				<div className="mobile-page">
+					{navList.map( r => (
+						<Route key={r.path} path={r.path} component={r.component} className="mobile-page"></Route>
+					))}
+					{homeList.map( r => (
+						<Route key={r.path} path={r.path} component={r.component} className="mobile-page"></Route>
+					))}
+				</div>	
+				<div className="mobile-nav">
 					<TabBar>
 				        {navList.map(v => (
 				          <TabBar.Item
@@ -144,83 +154,14 @@ class Container extends React.Component{
 				              this.props.history.push(v.path)
 				            }}
 				          >
-				          <Route key={v.path} path={v.path} component={v.component} className="mobile-page"></Route>
-				          </TabBar.Item>
+									</TabBar.Item>
 				        ))}
 				    </TabBar>
+						
 				</div>
+				
 			</div>
 		)
-		// return (
-		// 	<div className="mobile-container">
-		// 		<div className="mobile-header">
-		// 			<NavBar
-		// 		      mode="light"
-		// 		      icon={<Icon type="left" />}
-		// 		      onLeftClick={() => console.log('onLeftClick')}
-		// 		      rightContent={<Popover mask
-		// 	            overlayClassName="fortest"
-		// 	            overlayStyle={{ color: 'currentColor' }}
-		// 	            visible={this.state.visible}
-		// 	            overlay={[
-		// 	              (<Item key="4" value="scan" icon={myImg('tOtXhkIWzwotgGSeptou')} data-seed="logId">Scan</Item>),
-		// 	              (<Item key="5" value="special" icon={myImg('PKAgAqZWJVNwKsAJSmXd')} style={{ whiteSpace: 'nowrap' }}>My Qrcode</Item>),
-		// 	              (<Item key="6" value="button ct" icon={myImg('uQIYTFeRrjPELImDRrPt')}>
-		// 	                <span style={{ marginRight: 5 }}>Help</span>
-		// 	              </Item>),
-		// 	            ]}
-		// 	            align={{
-		// 	              overflow: { adjustY: 0, adjustX: 0 },
-		// 	              offset: [-10, 0],
-		// 	            }}
-		// 	            onVisibleChange={this.handleVisibleChange}
-		// 	            onSelect={this.onSelect}
-		// 	          >
-		// 	            <div style={{
-		// 	              height: '100%',
-		// 	              padding: '0 15px',
-		// 	              marginRight: '-15px',
-		// 	              display: 'flex',
-		// 	              alignItems: 'center',
-		// 	            }}
-		// 	            >
-		// 	              <Icon type="ellipsis" />
-		// 	            </div>
-		// 	          </Popover>}>
-		// 	          HRM
-		// 	        </NavBar>
-					
-					
-		// 		</div>
-		// 		<div className="mobile-page">
-		// 			{navList.map( r => (
-		// 				<Route key={r.path} path={r.path} component={r.component} className="mobile-page"></Route>
-		// 			))}
-		// 			{homeList.map( r => (
-		// 				<Route key={r.path} path={r.path} component={r.component} className="mobile-page"></Route>
-		// 			))}
-		// 		</div>	
-		// 		<div className="mobile-nav">
-		// 			<TabBar>
-		// 		        {navList.map(v => (
-		// 		          <TabBar.Item
-		// 		            key={v.path}
-		// 		            title={v.text}
-		// 		            icon={{uri: require(`./img/${v.icon}.png`)}}
-		// 		            selectedIcon={{uri: require(`./img/${v.icon}-sel.png`)}}
-		// 		            selected={pathname === v.path}
-		// 		            onPress={() => {
-		// 		              this.props.history.push(v.path)
-		// 		            }}
-		// 		          >
-		// 							</TabBar.Item>
-		// 		        ))}
-		// 		    </TabBar>
-						
-		// 		</div>
-				
-		// 	</div>
-		// )
 	}
 }
 
