@@ -10,10 +10,13 @@ const initState = {
 	msg: '',
 	username: '',
 	password: '',
-	type: ''
+	token: '',
+	type: '',
+	employeeName: '' || '藜麦'
 }
 
 export function user(state = initState, action) {
+	console.log(action);
 	switch(action.type){
 		case LOGIN_SUCCESS:
 			return {...state, msg: '', redirectTo:'/', isAuth: true, ...action.data}
@@ -51,18 +54,20 @@ export function login({username, password}) {
 					console.log('登录成功');
 					console.log(res);
 					console.log(res.data);
-					dispatch(loginSuccess(res.data));
+					dispatch(loginSuccess({...res.data, username}));
 				} else {
 					console.log('登录失败');
 					dispatch(errorMsg(res.data.msg));
 				}
-			})
+			}, res => {
+        console.log('失败了');
+      })
 	}
 }
 
 function loginSuccess(data) {
 	console.log(typeof data);
-	console.log(data.token);
+	console.log(data);
 	sessionStorage.setItem('token', data);
 	return {type: LOGIN_SUCCESS, data: data}
 }
