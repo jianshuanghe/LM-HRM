@@ -72,10 +72,6 @@ class Home extends React.Component {
                   <span>{r.text}</span>
                 </li> 
               ))}
-              {homeList.map( r => (
-                <Route key={r.path} path={r.path} component={r.component} className="homelist"></Route>
-              ))}
-
           </ul>
         </div>
       </div>
