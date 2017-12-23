@@ -70,26 +70,25 @@ class Container extends React.Component{
 			}
 		];
 		const homeList = [
-      {
-          path:'/mobile/salary',
-          text:'薪资查询',
-          src:'salary',
-          component:Salary,
-        },
-        {
-          path:'/mobile/attendance',
-          text:'考勤查询',
-          src:'attendance',
-          component:Attendance,
-        },
-        {
-          path:'/mobile/submpay',
-          text:'报销',
-          src:'submpay',
-          component:Submpay
-        }
-    ]
-
+			{
+				path:'/mobile/salary',
+				text:'薪资查询',
+				src:'salary',
+				component:Salary,
+				},
+				{
+				path:'/mobile/attendance',
+				text:'考勤查询',
+				src:'attendance',
+				component:Attendance,
+				},
+				{
+				path:'/mobile/submpay',
+				text:'报销',
+				src:'submpay',
+				component:Submpay
+				}
+			];
 		const { pathname } = this.props.location;
 		
 		return (
