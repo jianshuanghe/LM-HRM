@@ -1,23 +1,20 @@
+
 .mobile-container{
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  overflow: hidden;
   width: 100%;
 }
 .mobile-page{
-	height: 90vh;
+  flex-grow: 1;
+  overflow: auto;
 }
 .mobile-nav{
-  height: 100%;
-}
-
-/* .mobile-container{
-  height: 100vh;
+  /*flex-grow: 1;*/
+  /*position: fixed;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+  /*z-index: 50;*/
   width: 100%;
 }
-
-.mobile-nav{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 50;
-  width: 100%;
-} */

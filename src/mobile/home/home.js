@@ -3,9 +3,6 @@ import {Route, Router} from 'react-router-dom';
 import { WhiteSpace, TabBar, Icon, List, Badge} from 'antd-mobile';
 import HomeCarusel from './home-carusel';
 import HomeNotice from './home-notice';
-import Salary from './salary/salary';
-import Submpay from './submpay/submpay';
-import Attendance from './attendance/attendance';
 
 import './home.css';
 class Home extends React.Component {
@@ -32,19 +29,16 @@ class Home extends React.Component {
           path:'/mobile/salary',
           text:'薪资查询',
           src:'salary',
-          component:Salary,
         },
         {
           path:'/mobile/attendance',
           text:'考勤查询',
           src:'attendance',
-          component:Attendance,
         },
         {
           path:'/mobile/submpay',
           text:'报销',
           src:'submpay',
-          component:Submpay
         }
     ]
     return (
