@@ -96,7 +96,7 @@ class Vacation extends React.Component{
 							extra="请选择"
 							onChange={this.onChange}
 							onScrollChange={this.onScrollChange}
-							cascade='false'						
+							cascade={false}					
 							value={this.state.sValue}
 							title="请假类型">
 							<List.Item arrow="horizontal">请假类型</List.Item>
