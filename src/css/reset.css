@@ -111,6 +111,30 @@ input {
     padding:0; /*input默认有上下padding*/
 }
 
+.fl {
+    float: left;
+    _display: inline;
+}
+
+.fr {
+    float: right;
+    _display: inline;
+}
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clear:after,
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
 /* 隐藏滚动条 */
 /*::-webkit-scrollbar { width: 0; display: none;}
  select, textarea { outline: none; border: none; -webkit-appearance: none; }*/

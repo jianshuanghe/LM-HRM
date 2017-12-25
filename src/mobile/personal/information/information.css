@@ -1,0 +1,31 @@
+.info-tit{
+	height: 30vh;
+    background-color: #fff;
+    padding-top: 4vh;
+    margin-top: 1vh;
+}
+.info-tit-left{
+	float: left;
+    width: 48vw;
+    text-align: center;
+}
+.info-tit-left-img{
+	display: inline-block;
+    width: 35vw;
+    height: 20vh;
+    border-radius: 50%;
+}
+.info-tit-right{
+	float: left;
+    width: 52vw;
+}
+.info-tit-right p{
+	margin: 2.5vh 0;
+}
+.info-tit-right p b{
+
+}
+.info-cont{
+	text-align: center;
+    margin-top: 4vh;
+}

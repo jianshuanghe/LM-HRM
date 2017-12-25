@@ -9,6 +9,23 @@ class Personal extends React.Component{
 	}
 
 	render() {
+		const personalList = [
+			  {
+				path:'/mobile/information',
+				text:'个人信息',
+				src:'information'
+			  },
+			  {
+				path:'/mobile/postmessage',
+				text:'岗位信息',
+				src:'postmessage'
+			  },
+			  {
+				path:'/mobile/expenserecord',
+				text:'报销记录',
+				src:'expenserecord'
+			  }
+			];
 		return (
 			<div>
 				<div className="personal-head">
@@ -18,21 +35,18 @@ class Personal extends React.Component{
 				</div>
 				<div className="personal-con">
 					<ul>
-						<li>
-							<i></i>
-							<span>个人信息</span>
-							<b></b>
-						</li>
-						<li>
-							<i></i>
-							<span>岗位信息</span>
-							<b></b>
-						</li>
-						<li>
-							<i></i>
-							<span>报销记录</span>
-							<b></b>
-						</li>
+						{
+							personalList.map(r=>(
+								<li key={r.path}
+				                    onClick={() => {
+						            this.props.history.push(r.path)
+						        }}>
+									<i></i>
+									<span>{r.text}</span>
+									<b></b>
+								</li>
+							))
+						}
 					</ul>
 				</div>
 				<Button className="personal-foot">退出登录</Button>
