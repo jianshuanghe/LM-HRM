@@ -71,23 +71,24 @@ class Salary extends React.Component{
     handleSave(key){
      console.log('修改保存', this.state.data);
      const newData = [...this.state.data];
-     const target = newData.filter(item => key === item.key)[0];
+     let target = newData.filter(item => key === item.key)[0];
      let _this = this;
      if (target) {
       delete target.editable;
       let localKey = target.key;
       delete target.key;
-      axios.post('/server0/salarySheet/save', {salarySheet:target})
+      axios.post('/server0/salarySheet/save', {...target})
             .then(function (response) {
                 if (response.status === 200) {
+                    Object.assign(target,response.data);
                     target.key = localKey;
-                    notification.success({message:'保存修改成功'});
+                    notification.success({message:'修改保存成功'});
                     _this.setState({
                         data: newData,
                         cache: newData.map(item => ({...item}))  
                     })
                 } else {
-                    notification.error({message:'保存修改失败'});
+                    notification.error({message:'修改保存失败'});
                     target.key = localKey;
                     Object.assign(target,_this.state.cache.filter(item => key === item.key)[0]);
                     delete target.editable;
@@ -95,7 +96,7 @@ class Salary extends React.Component{
                 }
             })
             .catch(function (error) {
-                notification.error({message:'保存修改失败'});
+                notification.error({message:'修改保存失败'});
                 console.log('error', error);
                 target.key = localKey;
                 Object.assign(target,_this.state.cache.filter(item => key === item.key)[0]);
