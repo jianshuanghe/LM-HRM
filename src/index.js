@@ -33,27 +33,6 @@ const store = createStore(reducers, compose(
 	applyMiddleware(thunk),
 	window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
-// const homeList = [
-// 	{
-// 		path:'/mobile/salary',
-// 		text:'薪资查询',
-// 		src:'salary',
-// 		component:Salary,
-// 	  },
-// 	  {
-// 		path:'/mobile/attendance',
-// 		text:'考勤查询',
-// 		src:'attendance',
-// 		component:Attendance,
-// 	  },
-// 	  {
-// 		path:'/mobile/submpay',
-// 		text:'报销',
-// 		src:'submpay',
-// 		component:Submpay
-// 	  }
-//   ]
-
 
 ReactDOM.render(
 	
@@ -78,11 +57,6 @@ ReactDOM.render(
 					<Switch>
 						<Route path="/login" exact component={Login}></Route>
 						<Route component={Container}></Route>
-						
-						{/* {homeList.map( r => (
-							<Route key={r.path} path={r.path} component={r.component} className="mobile-page" exact></Route>
-						))} */}
-						{/*<Container />*/}
 					</Switch>
 				</MediaQuery>
 			</div>
