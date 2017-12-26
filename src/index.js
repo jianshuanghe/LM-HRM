@@ -18,10 +18,11 @@ import Logo from './common/logo/logo';
 import Head from './components/head/head';
 
 import Container from './mobile/container/container';
-import Home from './mobile/home/home';
-import VacationM from './mobile/vacation/vacation';
-import OrganizationM from './mobile/organization/organization';
-import Personal from './mobile/personal/personal';
+
+// import Salary from './mobile/home/salary/salary';
+// import Submpay from './mobile/home/submpay/submpay';
+// import Attendance from './mobile/home/attendance/attendance';
+
 
 // import './common/config';
 
@@ -32,9 +33,30 @@ const store = createStore(reducers, compose(
 	applyMiddleware(thunk),
 	window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
+// const homeList = [
+// 	{
+// 		path:'/mobile/salary',
+// 		text:'薪资查询',
+// 		src:'salary',
+// 		component:Salary,
+// 	  },
+// 	  {
+// 		path:'/mobile/attendance',
+// 		text:'考勤查询',
+// 		src:'attendance',
+// 		component:Attendance,
+// 	  },
+// 	  {
+// 		path:'/mobile/submpay',
+// 		text:'报销',
+// 		src:'submpay',
+// 		component:Submpay
+// 	  }
+//   ]
 
 
 ReactDOM.render(
+	
 	<Provider store={store}>
 		<BrowserRouter>
 			<div>
@@ -56,6 +78,10 @@ ReactDOM.render(
 					<Switch>
 						<Route path="/login" exact component={Login}></Route>
 						<Route component={Container}></Route>
+						
+						{/* {homeList.map( r => (
+							<Route key={r.path} path={r.path} component={r.component} className="mobile-page" exact></Route>
+						))} */}
 						{/*<Container />*/}
 					</Switch>
 				</MediaQuery>

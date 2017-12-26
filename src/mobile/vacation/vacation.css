@@ -1,0 +1,13 @@
+#vacation{
+    overflow: auto;
+}
+form{
+    width: 100%;
+}
+.am-list-item .am-list-line .am-list-extra {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+}
+.btnGroup{
+    width: 100%;
+}

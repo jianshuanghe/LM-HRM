@@ -9,7 +9,6 @@ import axios from 'axios';
 import './login.css';
 const InputGroup = Input.Group;
 
-
 @connect(
 	state => state.user,
 	{ login }
@@ -21,7 +20,6 @@ class Login extends React.Component{
 		super(props);
 		this.handleLogin = this.handleLogin.bind(this);
 		this.regain = this.regain.bind(this);
-		this.mss = this.mss.bind(this);
 	}
 
 	handleChange(key, val) {
@@ -41,24 +39,6 @@ class Login extends React.Component{
 		this.props.history.push('/regain');
 	}
 
-	mss() {
-		// let parama = '{"ownerName":"asdf","identifyType":"1","insuredFlag":"0010000","identifyNum":"110100197912171885","orderId":"3b1fd2de-0134-42ac-92fe-04de0ab6db0e"}'
-		let param;
-		let params = {};
-		params.ownerName="奚泳";
-		params.identifyType="1";
-		params.insuredFlag="0010000";
-		params.identifyNum="450106197201070523";
-		params.orderId="8ff01be5-0427-41cb-a516-26e604d407d8";
-		params.mssId = '101000051';
-		param = JSON.stringify(params);
-		console.log(params);
-		axios.post('/server1/mdmquery', {param})
-			.then(res => {
-				console.log(res);
-			})
-	}
-
 	render() {
 		return (
 			<div className="login">
@@ -75,7 +55,6 @@ class Login extends React.Component{
 				<div className="input-container">
 					<Button onClick={this.handleLogin} type="primary" className="to-login">登录</Button>
 					<Button onClick={this.regain} type="primary" className="to-pwd">找回密码</Button>
-					<Button onClick={this.mss} type="primary" className="to-pwd">找回密码</Button>
 				</div>
 			</div>
 		)
