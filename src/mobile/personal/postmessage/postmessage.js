@@ -1,7 +1,7 @@
 import React from 'react';
-import './organization.css'
+import './postmessage.css';
 
-class Organization extends React.Component{
+class Postmessage extends React.Component{
 
 	constructor(props) {
 		super(props);
@@ -10,10 +10,10 @@ class Organization extends React.Component{
 	render() {
 		return (
 			<div>
-				移动端组织
+				岗位信息详情
 			</div>
 		)
 	}
 }
 
-export default Organization;
+export default Postmessage;

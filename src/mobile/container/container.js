@@ -11,6 +11,10 @@ import Personal from '../personal/personal';
 import Salary from '../home/salary/salary';
 import Submpay from '../home/submpay/submpay';
 import Attendance from '../home/attendance/attendance';
+
+import Information from '../personal/information/information';
+import Postmessage from '../personal/postmessage/postmessage';
+import Expenserecord from '../personal/expenserecord/expenserecord';
 import './container.css';
 
 const Item = Popover.Item;
@@ -89,6 +93,26 @@ class Container extends React.Component{
 				component:Submpay
 				}
 			];
+		const personalList = [
+			  {
+				path:'/mobile/information',
+				text:'个人信息',
+				src:'information',
+				component:Information,
+			  },
+			  {
+				path:'/mobile/postmessage',
+				text:'岗位信息',
+				src:'postmessage',
+				component:Postmessage,
+			  },
+			  {
+				path:'/mobile/expenserecord',
+				text:'报销记录',
+				src:'expenserecord',
+				component:Expenserecord
+			  }
+			];
 		const { pathname } = this.props.location;
 		console.log(this.props);
 
@@ -136,6 +160,9 @@ class Container extends React.Component{
 						<Route key={r.path} path={r.path} component={r.component} className="mobile-page"></Route>
 					))}
 					{homeList.map( r => (
+						<Route key={r.path} path={r.path} component={r.component} className="mobile-page"></Route>
+					))}
+					{personalList.map( r => (
 						<Route key={r.path} path={r.path} component={r.component} className="mobile-page"></Route>
 					))}
 				</div>
