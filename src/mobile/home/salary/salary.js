@@ -88,7 +88,14 @@ class Salary extends React.Component{
 			console.log(error);
 		})
 	}
-
+	// 确认
+	onSubmit() {
+		console.log('确认');
+	}
+	// 申诉
+	onAppeal() {
+		console.log('申诉');
+	}
 	render() {
 		return (
 			<div className="single-page" >
@@ -117,7 +124,7 @@ class Salary extends React.Component{
 					</Item>
 					<Item className="btn-group" >
 						<Button type="primary" size="small" inline onClick={this.onSubmit} className="btn-sal">确认</Button>
-						<Button size="small" inline style={{ marginLeft: '2.5px' }} onClick={this.onReset} className="btn-sal">薪资申诉</Button>
+						<Button size="small" inline style={{ marginLeft: '2.5px' }} onClick={this.onAppeal} className="btn-sal">薪资申诉</Button>
 					</Item>
 				</List>
 			</div>
