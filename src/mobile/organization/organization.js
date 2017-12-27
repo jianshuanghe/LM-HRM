@@ -49,7 +49,7 @@ class Organization extends React.Component{
 	render() {
 		return (
 			<div>
-			    <Tree onSelect={this.onSelect}>
+			    <Tree onSelect={this.onSelect} className="fontsize">
 			    	{posts.map((one)=>{
 			    		return (
 							<TreeNode title={one.title} key={one.id}>
