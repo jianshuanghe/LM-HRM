@@ -11,7 +11,7 @@ class Attendance extends React.Component{
             uplast: '',
             down: true,
             refreshing: false,
-            height: document.body.clientHeight,
+            height: (document.documentElement.clientHeight) - 100,
             
             checkAttendance: '',
             common: '',
