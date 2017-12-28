@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Card, List, Picker, DatePicker, TextareaItem, ImagePicker, Button } from 'antd-mobile';
 import { Icon} from 'antd';
 import { createForm } from 'rc-form';
+import axios from 'axios';
 import './vacation.css';
 
 const Item = List.Item;
@@ -10,72 +11,111 @@ const Item = List.Item;
 const message = '亲爱的***同学：您的可用调休时长为***小时，您的可用年假时长***小时，温馨提醒：事假需提前一个工作日申请，每月事假时长原则不允许超3*8.5小时，如果满足调休根据项目需要进行假期安排。'
 // 表单
 // 请假类型
-const seasons  = [
-	[
-	  {
-		label: '2013',
-		value: '2013',
-	  },
-	  {
-		label: '2014',
-		value: '2014',
-	  },
-	],
-	[
-	  {
-		label: '春',
-		value: '春',
-	  },
-	  {
-		label: '夏',
-		value: '夏',
-	  },
-	],
-  ];
-// 请假类型
-// 时间
+const typeList = [
+	{
+		label: '事假',
+		value: '事假',
+	},
+	{
+		label: '年假',
+		value: '年假',
+	},
+	{
+		label: '病假',
+		value: '病假',
+	},
+]
+// 开始结束时间（min-max）
 const nowTimeStamp = Date.now();
-const now = new Date(nowTimeStamp);
 
-let minDate = new Date(nowTimeStamp - 1e7);
-const maxDate = new Date(nowTimeStamp + 1e7);
-// console.log(minDate, maxDate);
-if (minDate.getDate() !== maxDate.getDate()) {
-  // set the minDate to the 0 of maxDate
-  minDate = new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate());
-}
+const start = new Date(nowTimeStamp);
+const end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), start.getHours(), start.getMinutes()+30);
+
 //图片
 const data = [];
+//备岗人员
+const reserveList=[
+	{
+		label: 'hx',
+		value: 'hx',
+	},
+	{
+		label: 'wsr',
+		value: '2',
+	},
+	{
+		label: 'fr',
+		value: '3',
+	},
+]
+const approverList=[
+	{
+		label: 'hx',
+		value: '1',
+	},
+	{
+		label: 'wsr',
+		value: '2',
+	},
+	{
+		label: 'fr',
+		value: '3',
+	},
+]
+//审批人员
 
 class Vacation extends React.Component{
-	state = {
-		files: data,
-		multiple: false,
-	}
-	onChange = (files, type, index) => {
-		console.log(files, type, index);
-		this.setState({
-			files,
-		});
-	}
-	onSegChange = (e) => {
-		const index = e.nativeEvent.selectedSegmentIndex;
-		this.setState({
-			multiple: index === 1,
-		});
-	}
-
-	state = {
-		date: now,
-		sValue:['2013', '春']
-	}
-
+	
 	constructor(props) {
 		super(props);
 	}
 
+	componentWillMount() {
+		var id = '5a43360e2e196109f457a509' 
+		axios.post('/server0/personalHolidayInfo/',{id})
+		.then((resp) => {
+			console.log(resp)
+		})
+	}
+
+	state = {
+		type:'',
+		startDate:start,
+		endDate:end,
+		cause:'',
+		img:{
+			files:data
+		},
+		reserve:'',
+		approver:'',
+	}
+
+	//更改图片
+	onChangeImg = (files, type, index) => {
+		console.log(files, type, index);
+		if(type==='add'){
+			this.setState({
+				files:this.state.img.files.push(files[files.length-1])
+			});
+		}else if(type==='remove'){
+			console.log('删除'+index)
+			this.setState({
+				files:this.state.img.files.splice(index,1)
+			});
+		}
+	}
+
+	onSubmit = () => {
+		console.log(this.state)
+	}
+
+	onReset = () => {
+		
+	}
+
 	render() {
-		const { files } = this.state;
+		// 图片
+		const { files } = this.state.img;
 		return (
 			<div id="vacation">
 				{/* 提示 */}
@@ -92,33 +132,40 @@ class Vacation extends React.Component{
 				<form>
 					<List>
 						<Picker 
-							data={seasons}
-							extra="请选择"
-							onChange={this.onChange}
-							onScrollChange={this.onScrollChange}
-							cascade={false}					
-							value={this.state.sValue}
-							title="请假类型">
-							<List.Item arrow="horizontal">请假类型</List.Item>
-						</Picker>
+							data={typeList} 
+							cols={1} 
+							extra="无"
+							value={this.state.type} 
+							onChange={type => this.setState({ type })}
+							// onChange={vacationType => this.setState({vacationType})}
+							>
+                            <List.Item arrow="horizontal" >请假类型</List.Item>
+                        </Picker>
 						<DatePicker
-							value={this.state.date}
-							onChange={date => this.setState({ date })}
+							maxDate={this.state.endDate}
+							value={this.state.startDate}
+							onChange={startDate => this.setState({ startDate })}
 							>
 							<List.Item arrow="horizontal">开始时间</List.Item>
 						</DatePicker>
 						<DatePicker
-							value={this.state.date}
-							onChange={date => this.setState({ date })}
+							minDate={this.state.startDate}
+							value={this.state.endDate}
+							onChange={endDate => this.setState({ endDate })}
 							>
 							<List.Item arrow="horizontal">结束时间</List.Item>
 						</DatePicker>
 						<Item>休假事由</Item>
 						<TextareaItem
 							rows={3}
-							placeholder="fixed number of lines"
+							placeholder="填写休假事由"
+							defaultValue=""
 						/>
 						<Picker 
+							data={reserveList} 
+							cols={1} 
+							value={this.state.reserve} 
+							onChange={reserve => this.setState({reserve})}
 							extra="无"
 							title="备岗人员">
 							<List.Item arrow="horizontal">备岗人员</List.Item>
@@ -126,11 +173,16 @@ class Vacation extends React.Component{
 						<Item extra={'上传医院病假条等'}>图片</Item>
 						<ImagePicker
 							files={files}
-							onChange={this.onChange}
+							onChange={this.onChangeImg}
 							onImageClick={(index, fs) => console.log(index, fs)}
-							multiple={this.state.multiple}
+							multiple={true}
+							// onAddImageClick={this.onAddImageClick}
 						/>
 						<Picker
+							data={approverList} 
+							cols={1} 
+							value={this.state.approver} 
+							onChange={approver => this.setState({approver})}
 							extra="无"
 							title="审批人员">
 							<List.Item arrow="horizontal">审批人员</List.Item>
