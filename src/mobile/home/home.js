@@ -10,6 +10,10 @@ class Home extends React.Component {
     data: ['', '', ''],
     imgHeight: 176,
   }
+  componentWillMount(){
+    this.calculate(document, window);
+    
+  }
   componentDidMount() {
     // simulate img loading
     setTimeout(() => {
@@ -21,6 +25,20 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
   }
+  calculate(doc, win){
+    var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+        var clientWidth = docEl.clientWidth;
+        if (!clientWidth) return;
+        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+    };
+
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+    console.log(recalc);
+}
   render() {
     
 		// const { pathname } = this.props.location;

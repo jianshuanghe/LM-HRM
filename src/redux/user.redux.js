@@ -48,7 +48,7 @@ export function login({username, password}) {
 	params.password = password;
 
 	return dispatch => {
-		axios.post('/server1/employeeInfo/login', params)
+		axios.get('/server1/employeeInfo/login', JSON.stringify(params))
 			.then(res => {
 				if (res.status === 200) {
 					console.log('登录成功');

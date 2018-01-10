@@ -1,11 +1,24 @@
 import React from 'react';
-import { List, WhiteSpace, Button} from 'antd-mobile';
+import { List, WhiteSpace, Button, Modal, WingBlank, Toast} from 'antd-mobile';
 import axios from 'axios';
 import './salary.css';
 const querystring = require('query-string');
 const Item = List.Item;
 const Brief = Item.Brief;
 const month = (new Date()).getMonth();
+const alert = Modal.alert;
+const salarySure = '薪资显示试行开放，确认无误后薪资信息将不可查询，如有薪资问题可点击薪资申诉，取消后默认保存一周时间！';
+const showAlert = () => {
+  const alertInstance = alert('Delete', 'Are you sure???', [
+    { text: 'Cancel', onPress: () => console.log('cancel'), style: 'default' },
+    { text: 'OK', onPress: () => console.log('ok') },
+  ]);
+  setTimeout(() => {
+    // 可以调用close方法以在外部close
+    console.log('auto close');
+    alertInstance.close();
+  }, 500000);
+};
 const salarycontents = [
 	{
 	  "id": "5a1ab8e44c1e651d20b01172",
@@ -52,35 +65,37 @@ class Salary extends React.Component{
 			houseFundDeduction: '',
 			tax: '',
 			historyPay: ''
-
 		}
 	}
 	componentWillMount() {
 		this.queryById();
 	}
 	queryById() {
+		// let params = {userId: "0"};
 		let params = {id: "5a1ab8e44c1e651d20b01172"};
-		let ppp = '5a1ab8e44c1e651d20b01172';
-		axios.post('/server0/salarySheet/queryById',ppp)
+		axios.post('/server0/salarySheet/queryById',params)
 		.then((resp) => {
 			console.log(resp);
-			resp = salarycontents;
+			let result = (resp.data)[0];
+			let pretaxSalary = (result.baseSalary+result.foodSubsidy+result.jobtitleSubsidy+result.educationSubsidy);
+			let afttaxSalary = pretaxSalary - result.tax;
+			
 			this.setState({
-				baseSalay: resp[0].baseSalary,
-				foodSubsidy: resp[0].foodSubsidy,
-				jobtitleSubsidy: resp[0].jobtitleSubsidy,
-				educationSubsidy: resp[0].educationSubsidy,
+				baseSalay: result.baseSalary,
+				foodSubsidy: result.foodSubsidy,
+				jobtitleSubsidy: result.jobtitleSubsidy,
+				educationSubsidy: result.educationSubsidy,
 	
-				pretaxSalary: resp[0].pretaxSalary,
-				afttaxSalary: resp[0].jobtitleSubsidy,
-				totalSalary: resp[0].totalSalary,
-				overtimePay: resp[0].overtimePay,
-				attendanceDeduction: resp[0].attendanceDeduction,
-				outlineDeduction: resp[0].outlineDeduction,
-				insuranceDeduction: resp[0].insuranceDeduction,
-				providentFundDeduction: resp[0].providentFundDeduction,
-				tax: resp[0].tax,
-				historyPay: resp[0].historyPay
+				pretaxSalary: pretaxSalary,
+				afttaxSalary: result.jobtitleSubsidy ,
+				totalSalary: result.totalSalary,
+				overtimePay: result.overtimePay,
+				attendanceDeduction: result.attendanceDeduction,
+				otherDeduction: result.otherDeduction,
+				insuranceDeduction: result.insuranceDeduction,
+				providentFundDeduction: result.providentFundDeduction,
+				tax: result.tax,
+				historyPay: result.otherSubsidy
 			});
 
 		})
@@ -110,21 +125,44 @@ class Salary extends React.Component{
 					</Item>
 					<Item wrap>
 						<ul>
-							<li>{month}月发放工资信息</li>
+							<li>{month === 0? '12' : month}月发放工资信息</li>
 							<li>税前总薪资：{this.state.pretaxSalary}</li>
 							<li>税后总薪资：{this.state.afttaxSalary}</li>
 							<li>薪资获得：{this.state.totalSalary}</li>
 							<li>加班所得：{this.state.overtimePay}</li>
 							<li>考勤扣除：{this.state.attendanceDeduction}</li>
-							<li>违规扣除：{this.state.outlineDeduction}</li>
+							<li>违规扣除：{this.state.otherDeduction}</li>
 							<li>五险扣除：{this.state.insuranceDeduction}</li>
 							<li>公积金扣除：{this.state.providentFundDeduction}</li>
 							<li>历史补偿：{this.state.historyPay}</li>
 						</ul>
 					</Item>
 					<Item className="btn-group" >
-						<Button type="primary" size="small" inline onClick={this.onSubmit} className="btn-sal">确认</Button>
-						<Button size="small" inline style={{ marginLeft: '2.5px' }} onClick={this.onAppeal} className="btn-sal">薪资申诉</Button>
+							<Button type="primary" size="small" inline className="btn-sal" onClick={() => alert('薪资确认提示', salarySure, [
+								{ 	text: '确认', 
+									onPress: () => new Promise((resolve) => {
+										Toast.info('已确认薪资', 1);
+										setTimeout(resolve, 1000);
+									})
+								},
+								{
+									text: '取消'
+								},
+								])}
+							>确认</Button>
+							<Button  size="small" inline className="btn-sal" style={{ marginLeft: '2.5px' }} onClick={() => alert('Delete', 'Are you sure???', [
+								{ 	text: 'Cancel', 
+									onPress: () => new Promise((resolve) => {
+										Toast.info('onPress Promise', 1);
+										setTimeout(resolve, 1000);
+									})
+								},
+								{
+									text: 'Ok',
+									onPress: () => console.log('cancel')
+								},
+								])}
+							>薪资申诉</Button>
 					</Item>
 				</List>
 			</div>
