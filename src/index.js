@@ -18,10 +18,11 @@ import Logo from './common/logo/logo';
 import Head from './components/head/head';
 
 import Container from './mobile/container/container';
-import Home from './mobile/home/home';
-import VacationM from './mobile/vacation/vacation';
-import OrganizationM from './mobile/organization/organization';
-import Personal from './mobile/personal/personal';
+
+// import Salary from './mobile/home/salary/salary';
+// import Submpay from './mobile/home/submpay/submpay';
+// import Attendance from './mobile/home/attendance/attendance';
+
 
 // import './common/config';
 
@@ -33,8 +34,8 @@ const store = createStore(reducers, compose(
 	window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
 
-
 ReactDOM.render(
+	
 	<Provider store={store}>
 		<BrowserRouter>
 			<div>
@@ -56,7 +57,6 @@ ReactDOM.render(
 					<Switch>
 						<Route path="/login" exact component={Login}></Route>
 						<Route component={Container}></Route>
-						{/*<Container />*/}
 					</Switch>
 				</MediaQuery>
 			</div>

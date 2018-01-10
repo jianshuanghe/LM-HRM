@@ -1,8 +1,16 @@
+.mobile-home {
+    /* height: 90vh; */
+}
 .mobile-home .query ul{
     text-align: center;
 }
 .mobile-home .query li{
     display: inline-block;
     padding: 27px;
-    width: 33vw;
+    width: 31vw;
+}
+.mobile-home .query li img{
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
 }

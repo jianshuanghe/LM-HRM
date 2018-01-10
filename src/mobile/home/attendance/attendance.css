@@ -1,0 +1,13 @@
+.mobile-attendance{
+    height: 70vh;
+    
+}
+.mobile-attendance .attendance-box{
+    margin: 15px;
+    padding: 15px;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+.mobile-attendance .am-flexbox-align-center{
+    line-height: 2;
+}

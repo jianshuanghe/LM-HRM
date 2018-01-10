@@ -1,0 +1,14 @@
+.single-page{
+    background-color: #fff;
+    height: 100%;
+}
+.single-page .am-list-content li{
+    font-size: 14px;
+    line-height: 5vh;
+}
+.single-page .btn-group .am-list-content{
+    text-align: center;
+}
+.single-page .btn-group .am-list-content .btn-sal{
+    width: 85px;
+}
