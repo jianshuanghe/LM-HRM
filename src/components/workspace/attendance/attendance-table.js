@@ -92,61 +92,67 @@ class EditableTable extends React.Component {
       dataIndex: 'name',
       render: (text, record, index) => this.renderColumns(this.state.data, index, 'name', text),
     }, {
-      title: '职级',
-      dataIndex: 'rank',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'rank', text),
+      title: '额定工时',
+      dataIndex: 'ratedWorkingHours',
+      render: (text, record, index) => this.renderColumns(this.state.data, index, 'ratedWorkingHours', text),
     }, {
-      title: '部门',
-      dataIndex: 'department',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'department', text),
+      title: '实际工时',
+      dataIndex: 'actualWorkingHours',
+      render: (text, record, index) => this.renderColumns(this.state.data, index, 'actualWorkingHours', text),
     }, {
-      title: '日期',
-      dataIndex: 'date',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'date', text),
+      title: '加班工时',
+      dataIndex: 'overtimeWorkingHours',
+      render: (text, record, index) => this.renderColumns(this.state.data, index, 'overtimeWorkingHours', text),
     }, {
-      title: '上班时间',
-      dataIndex: 'arrive',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'arrive', text),
+      title: '迟到时长',
+      dataIndex: 'lateHours',
+      render: (text, record, index) => this.renderColumns(this.state.data, index, 'lateHours', text),
     }, {
-      title: '下班时间',
-      dataIndex: 'leave',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'leave', text),
+      title: '早退时长',
+      dataIndex: 'earlyHours',
+      render: (text, record, index) => this.renderColumns(this.state.data, index, 'earlyHours', text),
     }, {
-      title: '正常工时',
-      dataIndex: 'common',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'common', text),
+      title: '请假时长',
+      dataIndex: 'leaveHours',
+      render: (text, record, index) => this.renderColumns(this.state.data, index, 'leaveHours', text),
     }, {
-      title: '常规加班工时',
-      dataIndex: 'overtime',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'overtime', text),
+      title: '旷工时长',
+      dataIndex: 'absentHours',
+      render: (text, record, index) => this.renderColumns(this.state.data, index, 'absentHours', text),
     }, {
-      title: '996加班工时',
-      dataIndex: 'overtimenns',
-      render: (text, record, index) => this.renderColumns(this.state.data, index, 'overtimenns', text),
-    }, {
-      title: '操作',
-      dataIndex: 'operation',
-      render: (text, record, index) => {
-        const { editable } = this.state.data[index].name;
-        return (
-          <div className="editable-row-operations">
-            {
-              editable ?
-                <span>
-                  <a onClick={() => this.editDone(index, 'save')}>保存</a>
-                  <Popconfirm title="确定取消?" onConfirm={() => this.editDone(index, 'cancel')}>
-                    <a>取消</a>
-                  </Popconfirm>
-                </span>
-                :
-                <span>
-                  <a onClick={() => this.edit(index)}>编辑</a>
-                </span>
-            }
-          </div>
-        );
-      },
-    }];
+      title: '是否打卡',
+      dataIndex: 'isPunchCard',
+      render: (text, record, index) => this.renderColumns(this.state.data, index, 'isPunchCard', text),
+    },  {
+      title: '迟到次数',
+      dataIndex: 'latetimes',
+      render: (text, record, index) => this.renderColumns(this.state.data, index, 'latetimes', text),
+    }
+    // , {
+    //   title: '操作',
+    //   dataIndex: 'operation',
+    //   render: (text, record, index) => {
+    //     const { editable } = this.state.data[index].name;
+    //     return (
+    //       <div className="editable-row-operations">
+    //         {
+    //           editable ?
+    //             <span>
+    //               <a onClick={() => this.editDone(index, 'save')}>保存</a>
+    //               <Popconfirm title="确定取消?" onConfirm={() => this.editDone(index, 'cancel')}>
+    //                 <a>取消</a>
+    //               </Popconfirm>
+    //             </span>
+    //             :
+    //             <span>
+    //               <a onClick={() => this.edit(index)}>编辑</a>
+    //             </span>
+    //         }
+    //       </div>
+    //     );
+    //   },
+    // }
+    ];
     this.state = {
       dataEg: [{
         key: '0',
@@ -158,37 +164,41 @@ class EditableTable extends React.Component {
           editable: false,
           value: '32',
         },
-        rank: {
+        ratedWorkingHours: {
           editable: false,
           value: '32',
         },
-        department: {
+        actualWorkingHours: {
           editable: false,
           value: '32',
         },
-        date: {
+        overtimeWorkingHours: {
           editable: false,
           value: '32',
         },
-        arrive: {
+        lateHours: {
           editable: false,
           value: '32',
         },
-        leave: {
+        earlyHours: {
           editable: false,
           value: '32',
         },
-        common: {
+        leaveHours: {
           editable: false,
           value: '32',
         },
-        overtime: {
+        absentHours: {
           editable: false,
           value: '32',
         },
-        overtimenns: {
+        isPunchCard: {
           editable: false,
           value: '32',
+        },
+        latetimes: {
+          editable: false,
+          value: '0',
         },
       }],
       data: [{
@@ -201,35 +211,39 @@ class EditableTable extends React.Component {
           editable: false,
           value: '32',
         },
-        rank: {
+        ratedWorkingHours: {
           editable: false,
           value: '32',
         },
-        department: {
+        actualWorkingHours: {
           editable: false,
           value: '32',
         },
-        date: {
+        overtimeWorkingHours: {
           editable: false,
           value: '32',
         },
-        arrive: {
+        lateHours: {
           editable: false,
           value: '32',
         },
-        leave: {
+        earlyHours: {
           editable: false,
           value: '32',
         },
-        common: {
+        leaveHours: {
           editable: false,
           value: '32',
         },
-        overtime: {
+        absentHours: {
           editable: false,
           value: '32',
         },
-        overtimenns: {
+        isPunchCard: {
+          editable: false,
+          value: '322',
+        },
+        latetimes: {
           editable: false,
           value: '322',
         },
@@ -242,7 +256,6 @@ class EditableTable extends React.Component {
     console.log(data);
     let dataTemp = [];
     for (let i = 0; i < data.length; i++) {
-      debugger;
       let temp = JSON.parse(JSON.stringify(this.state.dataEg[0]));
       // alert(i);
       console.log('temp');
@@ -317,6 +330,20 @@ class EditableTable extends React.Component {
     });
   }
   render() {
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      },
+      onSelect: (record, selected, selectedRows) => {
+        console.log(record, selected, selectedRows);
+      },
+      onSelectAll: (selected, selectedRows, changeRows) => {
+        console.log(selected, selectedRows, changeRows);
+      },
+      getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User',    // Column configuration not to be checked
+      }),
+    };
     // console.log('render 22222');
     const { data } = this.state;
     const dataSource = data.map((item) => {
@@ -327,7 +354,7 @@ class EditableTable extends React.Component {
       return obj;
     });
     const columns = this.columns;
-    return <Table bordered dataSource={dataSource} columns={columns} />;
+    return <Table bordered rowSelection={rowSelection} dataSource={dataSource} columns={columns} />;
   }
 }
 

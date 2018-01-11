@@ -1,8 +1,30 @@
-.example-input .ant-input {
+.query-input {
+	display: inline-block;
+}
+.query-input .ant-input {
   width: 300px;
   margin: 0 8px 8px 0;
 }
 .table-container {
   width: 95%;
   margin: 0 8px 8px 0;
+}
+.range-picker {
+	display: inline-block;
+	width: 600px;
+}
+.handle-file{
+	display: inline-block;
+}
+.file-upload{
+	display: inline-block;
+	margin: 0 15px;
+}
+.dib {
+	display: inline-block;
+	vertical-align: middle;
+}
+.rank {
+	margin-left: 20px;
+	width: 280px;
 }

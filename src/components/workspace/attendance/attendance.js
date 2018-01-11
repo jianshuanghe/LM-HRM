@@ -57,8 +57,12 @@ class Attendance extends React.Component{
 		let a  ={};
 		console.log(a);
 		a.pageNumber = 1;
-		a.pageSize = 10;
+		a.pageSize = 20;
 		a.attendanceStr = {};
+		a.attendanceStr.startDate = this.state.startDate;
+		a.attendanceStr.endDate = this.state.endDate;
+		a.attendanceStr.name = this.state.name;
+		a.attendanceStr.identifier = this.state.identifier;
 		axios.get('/server0/attendanceInfo/condition/page', {params:a})
 			.then(res => {
 				console.log('res.data');
@@ -71,8 +75,15 @@ class Attendance extends React.Component{
 					let test = {};
 					test.identifier = rdc[i].employeeCode;
 					test.name = rdc[i].employeeName;
-					test.rank = rdc[i].joblevelName;;
-					test.department = rdc[i].departmentCode;
+					test.ratedWorkingHours = rdc[i].ratedWorkingHours;
+					test.actualWorkingHours = rdc[i].actualWorkingHours;
+					test.overtimeWorkingHours = rdc[i].overtimeWorkingHours;
+					test.lateHours = rdc[i].lateHours;
+					test.earlyHours = rdc[i].earlyHours;
+					test.leaveHours = rdc[i].leaveHours;
+					test.absentHours = rdc[i].absentHours;
+					test.isPunchCard = rdc[i].isPunchCard;
+					test.latetimes = rdc[i].latetimes;
 					// console.log('test');
 					// console.log(test);
 					testt[i] = test;
@@ -128,24 +139,28 @@ class Attendance extends React.Component{
 		return (
 		  <div>
 		  	<p>{this.state.startDate}&{this.state.endDate}&{this.state.rank}&{this.state.name}&{this.state.identifier}</p>
-		    <RangePicker onChange={this.onDateChange} />
-		    <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.handleRankChange}>
+		    <div className="range-picker">
+		    	<RangePicker onChange={this.onDateChange} />
+		    </div>
+		    <Select defaultValue="lucy" className="rank" onChange={this.handleRankChange}>
 	         <Option value="jack">Jack</Option>
 	         <Option value="lucy">Lucy</Option>
 	         <Option value="disabled">Disabled</Option>
 	         <Option value="Yiminghe">yiminghe</Option>
 	       </Select>
-		    <div className="example-input">
+		    <div className="query-input dib">
 	        <Input placeholder="姓名" data-type="name" onBlur={this.handleValueChange} />
 	        <Input placeholder="员工编号" data-type="identifier" onBlur={this.handleValueChange} />
 	      </div>
-	      <div>
+	      <div className="handle-file dib">
 	        <Button type="primary" onClick={this.query}>查询</Button>
-	        <Upload {...uploadCfg}>
-	           <Button>
-	             <Icon type="upload" /> 考勤导入
-	           </Button>
-	         </Upload>
+	        <div className="file-upload dib">
+		        <Upload {...uploadCfg}>
+		          <Button>
+		            <Icon type="upload" /> 考勤导入
+		          </Button>
+		        </Upload>
+	        </div>
 	        <Button type="primary">模板下载</Button>
 	      </div>
 	      <div className="table-container">
