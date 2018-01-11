@@ -56,20 +56,22 @@ class Attendance extends React.Component{
 	query() {
 		let a  ={};
 		console.log(a);
-		a.pageNumber=1;
-		a.pageSize=10;
-		axios.get('/department/findAll', {params:a})
+		a.pageNumber = 1;
+		a.pageSize = 10;
+		a.attendanceStr = {};
+		axios.get('/server0/attendanceInfo/condition/page', {params:a})
 			.then(res => {
 				console.log('res.data');
-				console.log(res.data.content);
-				let rdc = res.data.content;
+				console.log(res);
+				console.log(res.data.data.content);
+				let rdc = res.data.data.content;
 				let testt = [];
 				for (let i = 0; i < rdc.length; i++) {
 					console.log('test$$$$$');
 					let test = {};
-					test.identifier = rdc[i].id;
-					test.name = rdc[i].departmentName;
-					test.rank = rdc[i].dr;
+					test.identifier = rdc[i].employeeCode;
+					test.name = rdc[i].employeeName;
+					test.rank = rdc[i].joblevelName;;
 					test.department = rdc[i].departmentCode;
 					// console.log('test');
 					// console.log(test);
