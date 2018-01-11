@@ -12,3 +12,9 @@
 .single-page .btn-group .am-list-content .btn-sal{
     width: 85px;
 }
+.am-modal-button-group-h .am-modal-button:first-child {
+    color: #108ee9;
+}
+.am-modal-button-group-h .am-modal-button:last-child {
+    color: #000;
+}
