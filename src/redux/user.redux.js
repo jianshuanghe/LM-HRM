@@ -1,4 +1,5 @@
 import axios from 'axios';
+import querystring from 'query-string';
 
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG';
@@ -11,7 +12,7 @@ const initState = {
 	username: '',
 	password: '',
 	token: '',
-	type: '',
+	role: '',
 	employeeName: '' || '藜麦'
 }
 
@@ -48,12 +49,18 @@ export function login({username, password}) {
 	params.password = password;
 
 	return dispatch => {
-		axios.post('/server1/employeeInfo/login', params)
+		axios.post('/server1/employeeInfo/login', querystring.stringify(params))
 			.then(res => {
 				if (res.status === 200) {
 					console.log('登录成功');
 					console.log(res);
 					console.log(res.data);
+					// let redirectTo = '';
+					// if (res.data.role === 'superAdmin') {
+					// 	redirectTo = '/workspace/attendance';
+					// } else {
+					// 	redirectTo = '/mobile/home';
+					// }
 					dispatch(loginSuccess({...res.data, username}));
 				} else {
 					console.log('登录失败');
@@ -66,9 +73,14 @@ export function login({username, password}) {
 }
 
 function loginSuccess(data) {
+	console.log('loginsuccess');
 	console.log(typeof data);
 	console.log(data);
+	// let redirectTo = '';
 	sessionStorage.setItem('token', data);
+	// if (data.role === 'superAdmin') {
+	// 	redirectTo = '/workspace/attendance';
+	// }
 	return {type: LOGIN_SUCCESS, data: data}
 }
 
