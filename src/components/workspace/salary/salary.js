@@ -27,7 +27,7 @@ class Salary extends React.Component{
     }
     handleSearch(condition){
         let _this = this;
-        axios.post('/server0/salarySheet/query') // todo! 传入参数condition没有定
+        axios.post('/server0/salarySheet/query', {}) // todo! 传入参数condition没有定
         .then(function (response) {
             console.log('查询suc', response);
             if (response.status === 200) {
