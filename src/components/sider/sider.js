@@ -12,12 +12,15 @@ import Salary from '../workspace/salary/salary';
 import Staff from '../record/staff';
 import Rank from '../record/rank';
 import VacationR from '../record/vacation-r';
-import Organization from '../record/organization';
+import Organization from '../record/organization/organization';
 import SalaryR from '../record/salary';
+
+import Logo from '../../common/logo/logo';
+import Head from '../head/head';
 
 
 import {Layout, Menu, Icon } from 'antd';
-const { Sider, Content } = Layout;
+const { Header, Footer, Sider, Content } = Layout;
 const SubMenu = Menu.SubMenu;
 
 @withRouter
@@ -130,6 +133,11 @@ class SiderBar extends React.Component{
 		return (
 			<div>
 	      <Layout>
+		      <Header>
+		      	<div className="header-logo"><Logo /></div>
+		      	<Head />
+		      </Header>
+		      <Layout>
 	        <Sider>
 	        	<Menu
 			        mode="inline"
@@ -162,6 +170,8 @@ class SiderBar extends React.Component{
 	        	  ))}
 	        	</div>
 	        </Content>
+	        </Layout>
+	        <Footer>Footer</Footer>
 		    </Layout>
 	    </div>
     );

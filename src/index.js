@@ -35,7 +35,7 @@ const store = createStore(reducers, compose(
 ));
 
 ReactDOM.render(
-	
+
 	<Provider store={store}>
 		<BrowserRouter>
 			<div>
@@ -43,14 +43,14 @@ ReactDOM.render(
 				<MediaQuery query = "(min-device-width: 1000px)">
 					<Switch>
 						<Route path="/login" exact component={Login}></Route>
-						<Layout>
+						{/*<Layout>
 				      <Header>
 				      	<div className="header-logo"><Logo /></div>
 				      	<Head />
-				      </Header>
+				      </Header>*/}
 				        <SiderBar />
-				      <Footer>Footer</Footer>
-				    </Layout>
+				      {/*<Footer>Footer</Footer>*/}
+				    {/*</Layout>*/}
 			    </Switch>
 				</MediaQuery>
 				<MediaQuery query = "(max-device-width: 1000px)">
