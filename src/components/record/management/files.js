@@ -13,6 +13,7 @@ import './files.css'
 
 import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 import { Form, message,Select,Input,Button } from 'antd';
+var querystring = require('querystring');
 const Option = Select.Option;
 
 
@@ -189,19 +190,21 @@ class Files extends React.Component{
 	        this.setState({
 	            cacheData: response.map(item => ({...item}))
 	        })
-	        let params = {
-	        	token:'8g2c92m2pdqhrr9e890liujaont5qpk0', // token标识
-	        	id: "5a1ab8e44c1e651d20b01172",
-	        	pageNumber: 1, //页码
-	        	pageSize: 10, // 显示条数
+	        let employeeInfoStr = {
 	        	employeeName: this.state.name,
 			    employeeCode: this.state.number,
 			    department: this.state.megn,
 			    joblevel: this.state.rank,
 			    workingState: this.state.jobtype
 	        };
+	        let params = {
+	        	employeeInfoStr: JSON.stringify(employeeInfoStr),
+	        	token:'ec9f0jv2i8f1oprd9li96cki0r34e43k', // token标识
+	        	pageNumber: 12,
+	        	pageSize: 1
+	        }
 	        console.log(params);
-	        axios.get('/employeeInfo/condition/page',{params:params})
+	        axios.post('/server1/employeeInfo/condition/page',querystring.stringify(params))
 	        .then(function (response) {
 
 	        })

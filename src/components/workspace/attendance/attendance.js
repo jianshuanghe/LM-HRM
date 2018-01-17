@@ -72,6 +72,7 @@ class Attendance extends React.Component{
 				let testt = [];
 				for (let i = 0; i < rdc.length; i++) {
 					console.log('test$$$$$');
+					alert('jia')
 					let test = {};
 					test.identifier = rdc[i].employeeCode;
 					test.name = rdc[i].employeeName;

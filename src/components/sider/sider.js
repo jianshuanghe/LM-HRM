@@ -12,7 +12,7 @@ import Salary from '../workspace/salary/salary';
 import Staff from '../record/staff';
 import Rank from '../record/rank';
 import VacationR from '../record/vacation-r';
-import Organization from '../record/organization/organization';
+import Organization from '../record/organization';
 import SalaryR from '../record/salary';
 
 import Logo from '../../common/logo/logo';

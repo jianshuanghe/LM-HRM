@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { login } from '../../redux/user.redux';
 import axios from 'axios';
 import './login.css';
+var querystring = require('querystring');
 const InputGroup = Input.Group;
 
 @connect(
@@ -31,7 +32,21 @@ class Login extends React.Component{
 	handleLogin() {
 		console.log('handleLogin');
 		console.log(this.state);
-		this.props.login(this.state)
+		// this.props.login(this.state)
+		let params = {
+        	username: this.state.username,
+        	password: this.state.password,
+        	appId: '1111'
+        };
+        console.log(params);
+        axios.post('/server1/employeeInfo/login', querystring.stringify(params)).then((response) => {
+	        console.log(response);
+	        this.props.login(this.state)
+	        console.log('登陆成功')
+	    }).catch((error) => {
+	        console.log(error);
+	        console.log('登陆失败')
+	    });
 	}
 
 	regain() {
