@@ -11,7 +11,8 @@ import Salary from '../workspace/salary/salary';
 
 import Staff from '../record/staff';
 import Rank from '../record/rank';
-import VacationR from '../record/vacation-r';
+import VacationR from '../workspace/vacation/vacationFile';
+import VacationA from '../workspace/vacation/vacationApproval';
 import Organization from '../record/organization';
 import SalaryR from '../record/salary';
 
@@ -116,6 +117,12 @@ class SiderBar extends React.Component{
 				icon:'msg',
 				component:VacationR
 			},
+      {
+        path:'/record/vacationApproval',
+        text:'假期评审',
+        icon:'msg',
+        component:VacationA
+      },
 			{
 				path:'/record/organization',
 				text:'组织架构档案',

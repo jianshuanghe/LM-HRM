@@ -1,12 +1,12 @@
 @import '~antd/dist/antd.css';
 
-.Holiday .ant-form-inline .ant-form-item{
+.VacationForm .ant-row{
   margin-bottom:1rem;
 }
-.ant-table-tbody tr{
-  background: #fff;
+.VacationForm .ant-row .ant-col-7 .ant-form-item{
+  width:100%;
 }
 
-.ant-col-7 .ant-form-item{
-  width:100%;
+.VacationTable .ant-table-tbody tr{
+  background: #fff;
 }

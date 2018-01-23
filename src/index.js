@@ -35,7 +35,6 @@ const store = createStore(reducers, compose(
 ));
 
 ReactDOM.render(
-
 	<Provider store={store}>
 		<BrowserRouter>
 			<div>
@@ -63,6 +62,3 @@ ReactDOM.render(
 		</BrowserRouter>
 	</Provider>
 	, document.getElementById('root'));
-
-
-
