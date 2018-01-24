@@ -47,7 +47,6 @@ export function login({username, password}) {
 	params.appId = '1';
 	params.username = username;
 	params.password = password;
-
 	return dispatch => {
 		axios.post('/server1/employeeInfo/login', querystring.stringify(params))
 			.then(res => {
@@ -77,11 +76,15 @@ function loginSuccess(data) {
 	console.log(typeof data);
 	console.log(data);
 	// let redirectTo = '';
-	sessionStorage.setItem('token', data);
+	sessionStorage.setItem('token', data.token);
 	// if (data.role === 'superAdmin') {
 	// 	redirectTo = '/workspace/attendance';
 	// }
 	return {type: LOGIN_SUCCESS, data: data}
+}
+
+export function logout(){
+	return { type:LOGOUT }
 }
 
 

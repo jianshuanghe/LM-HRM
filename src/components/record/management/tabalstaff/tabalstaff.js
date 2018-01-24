@@ -118,6 +118,7 @@ class Tabalstaff extends React.Component{
 	    if (target) {
 	      delete target.editable;
 	      this.setState({ data: newData });
+	      console.log(newData,'jianshuanghe');
 	      this.cacheData = newData.map(item => ({ ...item }));
 	    }
 	  }
