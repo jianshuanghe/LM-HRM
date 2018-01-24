@@ -4,6 +4,7 @@ import { DatePicker, Input, Select, Upload, message, Button, Icon } from 'antd';
 import EditableTable from './attendance-table';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import querystring from 'query-string';
 import './attendance.css';
 const { RangePicker } = DatePicker;
 const Option = Select.Option;
@@ -19,11 +20,11 @@ class Attendance extends React.Component{
 		super(props);
 
 		this.state = {
-			startDate: '1111',
-			endDate: '2222',
-			rank: 'e1',
-			name: '张三',
-			identifier: '0000001'
+			startTime: '',
+			endTime: '',
+			rank: '',
+			employeeName: '',
+			employeeCode: ''
 		}
 
 		this.onDateChange = this.onDateChange.bind(this);
@@ -57,12 +58,17 @@ class Attendance extends React.Component{
 		let a  ={};
 		console.log(a);
 		a.pageNumber = 1;
-		a.pageSize = 20;
+		a.pageSize = 10;
 		a.attendanceStr = {};
-		a.attendanceStr.startDate = this.state.startDate;
-		a.attendanceStr.endDate = this.state.endDate;
-		a.attendanceStr.name = this.state.name;
-		a.attendanceStr.identifier = this.state.identifier;
+		a.attendanceStr.startTime = this.state.startTime;
+		a.attendanceStr.endTime = this.state.endTime;
+		a.attendanceStr.employeeName = this.state.employeeName;
+		a.attendanceStr.employeeCode = this.state.employeeCode;
+		if (!(this.state.startTime && this.state.endTime && this.state.employeeName && this.state.employeeCode)) {
+			a.attendanceStr = {};
+			console.log('a.attendanceStr');
+			console.log(a.attendanceStr);
+		}
 		axios.get('/server0/attendanceInfo/condition/page', {params:a})
 			.then(res => {
 				console.log('res.data');
