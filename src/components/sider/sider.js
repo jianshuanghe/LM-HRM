@@ -11,13 +11,8 @@ import Salary from '../workspace/salary/salary';
 
 import Staff from '../record/staff';
 import Rank from '../record/rank';
-<<<<<<< HEAD
-import VacationR from '../record/vacation-r';
-// import Organization from '../record/organization/organization';z
-=======
 import VacationR from '../workspace/vacation/vacationFile';
 import VacationA from '../workspace/vacation/vacationApproval';
->>>>>>> a4c8aff485c4ed7b3ebb201f7a3334b361d5d823
 import Organization from '../record/organization';
 import SalaryR from '../record/salary';
 
