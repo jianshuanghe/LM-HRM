@@ -5,6 +5,7 @@ import {Route} from 'react-router-dom';
 import { Popover,NavBar,TabBar, Icon } from 'antd-mobile';
 import Home from '../home/home';
 import VacationM from '../vacation/vacation';
+// import VacationF from '../vacation/vacationFile.js';
 import OrganizationM from '../organization/organization';
 import Personal from '../personal/personal';
 
@@ -60,6 +61,12 @@ class Container extends React.Component{
 		    icon:'vacation',
 		    component:VacationM,
 		  },
+		  // {
+		  //   path:'/record/vacation',
+		  //   text:'假期',
+		  //   icon:'vacation',
+		  //   component:VacationF,
+		  // },
 		  {
 		    path:'/mobile/organization',
 		    text:'组织',
