@@ -82,6 +82,7 @@ class Home extends React.Component {
 		            }}>
                   <img src={require(`./img/${r.src}.png`)} alt=""/>
                   <span>{r.text}</span>
+                  <div class="hintNum"><Badge text={22}/></div>
                 </li> 
               ))}
           </ul>
