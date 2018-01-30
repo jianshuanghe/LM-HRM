@@ -27,9 +27,9 @@ const myImg = src => <img src={`https://gw.alipayobjects.com/zos/rmsportal/${src
 
 class Container extends React.Component{
 
-	constructor(props) {
-		super(props);
-	};
+	// constructor(props) {
+	// 	super(props);
+	// };
 	state = {
 	    visible: false,
 	    selected: 'sss',

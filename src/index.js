@@ -14,20 +14,10 @@ import reducers from './redux/reducers'
 import IsLogin from './common/islogin/islogin';
 import Login from './components/login/login';
 import SiderBar from './components/sider/sider';
-import Logo from './common/logo/logo';
-import Head from './components/head/head';
 
 import Container from './mobile/container/container';
 
-// import Salary from './mobile/home/salary/salary';
-// import Submpay from './mobile/home/submpay/submpay';
-// import Attendance from './mobile/home/attendance/attendance';
-
-
 // import './common/config';
-
-import {Layout} from 'antd';
-const { Header, Footer } = Layout;
 
 const store = createStore(reducers, compose(
 	applyMiddleware(thunk),
