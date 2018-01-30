@@ -36,12 +36,10 @@ class EditableCell extends React.Component {
   //   console.log(this.props.table);
   // }
   handleChange(e) {
-    // console.log('handleChange 111111');
     const value = e.target.value;
     this.setState({ value });
   }
   render() {
-    // console.log('render 11111');
     const { value, editable } = this.state;
     return (
       <div>
@@ -253,38 +251,22 @@ class EditableTable extends React.Component {
   getDataFromFather() {
     console.log('getDataFromFather');
     const { data } = this.props;
-    console.log(data);
     let dataTemp = [];
     for (let i = 0; i < data.length; i++) {
       let temp = JSON.parse(JSON.stringify(this.state.dataEg[0]));
-      // alert(i);
-      console.log('temp');
-      console.log(temp);
-      console.log(this.state.dataEg[0]);
       Object.keys(temp).forEach((item) => {
-        // console.log(item);
         if (item === 'key') {
-          // console.log('key &&&&&&&data[i].identifier');
-          // console.log(data[i].identifier);
-          temp[item] = data[i].identifier;
+          temp[item] = Math.random();
         }
-        // console.log(data[i][item]);
         if (data[i][item] !== undefined) {
-          // console.log(data[i][item]);
           temp[item].value = data[i][item];
         }
       });
-      console.log(temp);
       dataTemp[i] = temp;
     }
-    console.log('dataTemp B');
-    console.log(dataTemp);
-    console.log('dataTemp A');
     this.setState({ data: dataTemp });
-    console.log(this.state);
   }
   renderColumns(data, index, key, text) {
-    // console.log('renderColumns');
     const { editable, status } = data[index][key];
     if (typeof editable === 'undefined') {
       return text;
@@ -330,21 +312,20 @@ class EditableTable extends React.Component {
     });
   }
   render() {
-    const rowSelection = {
-      onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-      },
-      onSelect: (record, selected, selectedRows) => {
-        console.log(record, selected, selectedRows);
-      },
-      onSelectAll: (selected, selectedRows, changeRows) => {
-        console.log(selected, selectedRows, changeRows);
-      },
-      getCheckboxProps: record => ({
-        disabled: record.name === 'Disabled User',    // Column configuration not to be checked
-      }),
-    };
-    // console.log('render 22222');
+    // const rowSelection = {
+    //   onChange: (selectedRowKeys, selectedRows) => {
+    //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    //   },
+    //   onSelect: (record, selected, selectedRows) => {
+    //     console.log(record, selected, selectedRows);
+    //   },
+    //   onSelectAll: (selected, selectedRows, changeRows) => {
+    //     console.log(selected, selectedRows, changeRows);
+    //   },
+    //   getCheckboxProps: record => ({
+    //     disabled: record.name === 'Disabled User',    // Column configuration not to be checked
+    //   }),
+    // };
     const { data } = this.state;
     const dataSource = data.map((item) => {
       const obj = {};
@@ -354,7 +335,7 @@ class EditableTable extends React.Component {
       return obj;
     });
     const columns = this.columns;
-    return <Table bordered rowSelection={rowSelection} dataSource={dataSource} columns={columns} />;
+    return <Table bordered dataSource={dataSource} columns={columns} />;
   }
 }
 

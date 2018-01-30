@@ -4,7 +4,6 @@ import { DatePicker, Input, Select, Upload, message, Button, Icon } from 'antd';
 import EditableTable from './attendance-table';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import querystring from 'query-string';
 import './attendance.css';
 const { RangePicker } = DatePicker;
 const Option = Select.Option;
@@ -37,48 +36,35 @@ class Attendance extends React.Component{
 	  console.log('componentWillMount attendance');
 	  this.query();
 	}
-
-	componentDidMount() {
-	  console.log('componentDidMount attendance');
-	  console.log(this.state);
-	  console.log(this.props);
-	  // this.query();
-	}
-
-	getDate() {
-		// /department/findAll?pageNumber=1&pageSize=10
-		console.log('obj');
-		axios.get('/department/findAll?pageNumber=1&pageSize=10', {})
-			.then(res => {
-				console.log(res.data);
-			})
-	}
+	// componentDidMount() {
+	//   console.log('componentDidMount attendance');
+	//   console.log(this.state);
+	//   console.log(this.props);
+	// }
 
 	query() {
-		let a  ={};
-		console.log(a);
-		a.pageNumber = 1;
-		a.pageSize = 10;
-		a.attendanceStr = {};
-		a.attendanceStr.startTime = this.state.startTime;
-		a.attendanceStr.endTime = this.state.endTime;
-		a.attendanceStr.employeeName = this.state.employeeName;
-		a.attendanceStr.employeeCode = this.state.employeeCode;
-		if (!(this.state.startTime && this.state.endTime && this.state.employeeName && this.state.employeeCode)) {
-			a.attendanceStr = {};
-			console.log('a.attendanceStr');
-			console.log(a.attendanceStr);
+		let attQuery  ={};
+		attQuery.pageNumber = 1;
+		attQuery.pageSize = 10;
+		attQuery.attendanceStr = {};
+		attQuery.attendanceStr.startTime = this.state.startTime;
+		attQuery.attendanceStr.endTime = this.state.endTime;
+		attQuery.attendanceStr.employeeName = this.state.employeeName;
+		attQuery.attendanceStr.employeeCode = this.state.employeeCode;
+		for (const key of Object.keys(attQuery.attendanceStr)) {
+		  if (attQuery.attendanceStr[key] === '') {
+		  	delete attQuery.attendanceStr[key];
+		  }
 		}
-		axios.get('/server0/attendanceInfo/condition/page', {params:a})
+
+		axios.get('/server0/attendanceInfo/condition/page', {params:attQuery})
 			.then(res => {
-				console.log('res.data');
-				console.log(res);
-				console.log(res.data.data.content);
+				// console.log('res.data');
+				// console.log(res);
+				// console.log(res.data.data.content);
 				let rdc = res.data.data.content;
-				let testt = [];
+				let attOutcome = [];
 				for (let i = 0; i < rdc.length; i++) {
-					console.log('test$$$$$');
-					alert('jia')
 					let test = {};
 					test.identifier = rdc[i].employeeCode;
 					test.name = rdc[i].employeeName;
@@ -91,15 +77,9 @@ class Attendance extends React.Component{
 					test.absentHours = rdc[i].absentHours;
 					test.isPunchCard = rdc[i].isPunchCard;
 					test.latetimes = rdc[i].latetimes;
-					// console.log('test');
-					// console.log(test);
-					testt[i] = test;
+					attOutcome[i] = test;
 				}
-				console.log('testt');
-				console.log(testt);
-				this.setState({table: testt});
-				console.log('this.state');
-				console.log(this.state);
+				this.setState({table: attOutcome});
 				this.toChild();
 			})
 	}
@@ -113,7 +93,7 @@ class Attendance extends React.Component{
 	  console.log('Formatted Selected Time: ', dateString);
 	  console.log(value[0]._d);
 	  console.log(value[1]._d);
-	  this.setState({startDate: dateString[0], endDate: dateString[1]});
+	  this.setState({startTime: dateString[0], endTime: dateString[1]});
 	}
 
 	handleRankChange(value) {
@@ -144,8 +124,7 @@ class Attendance extends React.Component{
 		  },
 		};
 		return (
-		  <div>
-		  	<p>{this.state.startDate}&{this.state.endDate}&{this.state.rank}&{this.state.name}&{this.state.identifier}</p>
+		  <div className="attendance">
 		    <div className="range-picker">
 		    	<RangePicker onChange={this.onDateChange} />
 		    </div>
@@ -156,8 +135,8 @@ class Attendance extends React.Component{
 	         <Option value="Yiminghe">yiminghe</Option>
 	       </Select>
 		    <div className="query-input dib">
-	        <Input placeholder="姓名" data-type="name" onBlur={this.handleValueChange} />
-	        <Input placeholder="员工编号" data-type="identifier" onBlur={this.handleValueChange} />
+	        <Input placeholder="姓名" data-type="employeeName" onBlur={this.handleValueChange} />
+	        <Input placeholder="员工编号" data-type="employeeCode" onBlur={this.handleValueChange} />
 	      </div>
 	      <div className="handle-file dib">
 	        <Button type="primary" onClick={this.query}>查询</Button>
