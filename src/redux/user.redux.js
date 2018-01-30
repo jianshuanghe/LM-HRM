@@ -17,7 +17,6 @@ const initState = {
 }
 
 export function user(state = initState, action) {
-	console.log(action);
 	switch(action.type){
 		case LOGIN_SUCCESS:
 			return {...state, msg: '', redirectTo:'/', isAuth: true, ...action.data}
@@ -42,7 +41,6 @@ export function login({username, password}) {
 		return errorMsg('用户密码必须输入');
 	}
 
-	let appId = '1';
 	let params = {};
 	params.appId = '1';
 	params.username = username;

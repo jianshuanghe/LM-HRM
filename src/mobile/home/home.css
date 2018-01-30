@@ -6,6 +6,7 @@
     font-size: 0.16rem;
 }
 .mobile-home .query li{
+    position: relative;
     display: inline-block;
     padding: 27px;
     width: 32vw;
@@ -14,5 +15,20 @@
     display: block;
     margin: 0 auto;
     margin-bottom: 10px;
-    width: 1rem;
+    width: 1.1rem;
+}
+.mobile-home .query .hintNum{
+    position: absolute;
+    top: 0.42rem;
+    right: 0.45rem;
+}
+.hintNum .am-badge{
+    /* width: 0.5rem; */
+}
+.hintNum .am-badge .am-badge-text{
+    text-align: center;
+    font-size: 0.16rem;
+    height: 0.35rem;
+    width: 0.5rem;
+    line-height: 0.35rem;
 }

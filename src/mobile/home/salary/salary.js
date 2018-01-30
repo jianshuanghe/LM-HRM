@@ -72,8 +72,12 @@ class Salary extends React.Component{
 	}
 	queryById() {
 		// let params = {userId: "0"};
-		let params = {id: "5a1ab8e44c1e651d20b01172"};
-		axios.post('/server0/salarySheet/queryById',params)
+		// let params = {userid: "5a43360e2e196109f457a509"};
+		axios.get('/server0/salarySheet/queryById',{
+			params:{
+				userid: "5a43360e2e196109f457a509"
+			}
+		})
 		.then((resp) => {
 			console.log(resp);
 			let result = (resp.data)[0];
