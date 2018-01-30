@@ -4,6 +4,7 @@ import SalaryBable from './salary-table'
 import WrappedSalaryForm from './salary-form'
 import {Modal, notification} from 'antd'
 import './salary.css'
+import querystring from 'query-string';
 
 class Salary extends React.Component{
     constructor(props) {
@@ -27,7 +28,8 @@ class Salary extends React.Component{
     }
     handleSearch(condition){
         let _this = this;
-        axios.post('/server0/salarySheet/query', {}) // todo! 传入参数condition没有定
+        console.log('入参condition',condition);
+        axios.get('/server0/salarySheet/query', {params:{salarySheetStr:{}}}) // todo! 传入参数condition没有定
         .then(function (response) {
             console.log('查询suc', response);
             if (response.status === 200) {
@@ -77,7 +79,7 @@ class Salary extends React.Component{
       delete target.editable;
       let localKey = target.key;
       delete target.key;
-      axios.post('/server0/salarySheet/save', {...target})
+      axios.put('/server0/salarySheet/save', {...target})
             .then(function (response) {
                 if (response.status === 200) {
                     Object.assign(target,response.data);

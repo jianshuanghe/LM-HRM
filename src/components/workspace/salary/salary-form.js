@@ -15,8 +15,11 @@ class SalaryForm extends React.Component {
         super(props)
     }
     search = () =>{
-        let {id,name,department,rank,date} = this.props.form.getFieldsValue();
-        let condition = {id,name,department,rank,date}; // todo!目前接口入参未定
+        let {employeeCode,employeeName,departmentName,joblevel,date} = this.props.form.getFieldsValue();
+        let condition = {employeeCode,employeeName,departmentName,joblevel}; // todo!目前接口入参未定
+        condition.EndDate = date ? date[1].toString() : '';
+        condition.startDate = date ? date[0].toString() : '';
+        condition.id = '1';
         console.log('查询条件', condition);
         this.props.form.validateFields((err,values) => {
             if(!err){
@@ -31,14 +34,14 @@ class SalaryForm extends React.Component {
                 <Row gutter={40}>
                     <Col span={6}>
                         <FormItem label='姓名：' {...formItemLayout}>
-                        {getFieldDecorator('name')(
+                        {getFieldDecorator('employeeName')(
                             <Input/>
                             )}
                         </FormItem>
                     </Col>
                     <Col span={6}>
                         <FormItem label='员工编号：' {...formItemLayout}>
-                        {getFieldDecorator('id')(
+                        {getFieldDecorator('employeeCode')(
                         <Input/>
                         )}
                         </FormItem>
@@ -52,33 +55,33 @@ class SalaryForm extends React.Component {
                 <Row gutter={40}>
                     <Col span={6}>
                         <FormItem label='部门' {...formItemLayout}>
-                        {getFieldDecorator('department')(
+                        {getFieldDecorator('departmentName')(
                             <Select>
-                                <Option value='1'>技术部</Option>
-                                <Option value='2'>财务部</Option>
-                                <Option value='3'>总经办</Option>
+                                <Option value='技术部'>技术部</Option>
+                                <Option value='财务部'>财务部</Option>
+                                <Option value='总经办'>总经办</Option>
                             </Select>
                         )}
                         </FormItem>
                     </Col>
                     <Col span={6}>
                         <FormItem label='职级' {...formItemLayout}>
-                        {getFieldDecorator('rank')(
+                        {getFieldDecorator('joblevel')(
                             <Select>
-                                <Option value='1'>兼职</Option>
-                                <Option value='2'>F试用期</Option>
-                                <Option value='3'>E1专员</Option>
-                                <Option value='4'>E2高级专员</Option>
-                                <Option value='5'>E3资深员工</Option>
-                                <Option value='6'>D1主管/项目经理</Option>
-                                <Option value='7'>D2高级主管</Option>
-                                <Option value='8'>D3资深主管</Option>
-                                <Option value='9'>B1经理</Option>
-                                <Option value='10'>B2高级经理</Option>
-                                <Option value='11'>B3高级总监</Option>
-                                <Option value='12'>A1副总裁</Option>
-                                <Option value='13'>A2总裁</Option>
-                                <Option value='14'>A3董事长</Option>
+                                <Option value='兼职'>兼职</Option>
+                                <Option value='F试用期'>F试用期</Option>
+                                <Option value='E1专员'>E1专员</Option>
+                                <Option value='E2高级专员'>E2高级专员</Option>
+                                <Option value='E3资深员工'>E3资深员工</Option>
+                                <Option value='D1主管/项目经理'>D1主管/项目经理</Option>
+                                <Option value='D2高级主管'>D2高级主管</Option>
+                                <Option value='D3资深主管'>D3资深主管</Option>
+                                <Option value='B1经理'>B1经理</Option>
+                                <Option value='B2高级经理'>B2高级经理</Option>
+                                <Option value='B3高级总监'>B3高级总监</Option>
+                                <Option value='A1副总裁'>A1副总裁</Option>
+                                <Option value='A2总裁'>A2总裁</Option>
+                                <Option value='A3董事长'>A3董事长</Option>
                             </Select>
                         )}
                         </FormItem>
