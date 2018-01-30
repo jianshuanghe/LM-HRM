@@ -15,11 +15,19 @@ class SalaryForm extends React.Component {
         super(props)
     }
     search = () =>{
-        let {employeeCode,employeeName,departmentName,joblevel,date} = this.props.form.getFieldsValue();
-        let condition = {employeeCode,employeeName,departmentName,joblevel}; // todo!目前接口入参未定
-        condition.EndDate = date ? date[1].toString() : '';
-        condition.startDate = date ? date[0].toString() : '';
-        condition.id = '1';
+        let condition = {};
+        let tem = ['employeeCode','employeeName']; //'departmentName','joblevel'
+        let res = this.props.form.getFieldsValue();
+        for (let item of tem) {
+            if (res[item]) {
+                condition[item] = res[item];
+            }
+        }
+        if (res.date) {
+            condition.EndDate = res.date[1].toString();
+            condition.startDate = res.date[0].toString();
+        }
+
         console.log('查询条件', condition);
         this.props.form.validateFields((err,values) => {
             if(!err){
@@ -57,7 +65,7 @@ class SalaryForm extends React.Component {
                         <FormItem label='部门' {...formItemLayout}>
                         {getFieldDecorator('departmentName')(
                             <Select>
-                                <Option value='技术部'>技术部</Option>
+                                <Option value='ip'>技术部</Option>
                                 <Option value='财务部'>财务部</Option>
                                 <Option value='总经办'>总经办</Option>
                             </Select>

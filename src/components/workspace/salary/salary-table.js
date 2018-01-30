@@ -113,7 +113,6 @@ class SalaryTable extends React.Component{
   renderColumns(text,record,column) {
     return <EditableCell value={text} editable={record.editable} onChange={value=>this.props.change(value,record.key,column)}></EditableCell>
   }
-
   render() {
       return (
           <Table columns={this.columns} dataSource={this.props.data} rowSelection={this.rowSelection} scroll={{x:1800}}/>

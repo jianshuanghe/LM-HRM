@@ -29,7 +29,7 @@ class Salary extends React.Component{
     handleSearch(condition){
         let _this = this;
         console.log('入参condition',condition);
-        axios.get('/server0/salarySheet/query', {params:{salarySheetStr:{}}}) // todo! 传入参数condition没有定
+        axios.get('/server0/salarySheet/query', {params:{salarySheetStr:{...condition}}})
         .then(function (response) {
             console.log('查询suc', response);
             if (response.status === 200) {
