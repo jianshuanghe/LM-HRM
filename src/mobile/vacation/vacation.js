@@ -33,21 +33,7 @@ const end = new Date(start.getFullYear(), start.getMonth(), start.getDate(), sta
 
 //图片
 const data = [];
-//备岗人员
-const reserveList=[
-	{
-		label: 'hx',
-		value: 'hx',
-	},
-	{
-		label: 'wsr',
-		value: '2',
-	},
-	{
-		label: 'fr',
-		value: '3',
-	},
-]
+//审批人
 const approverList=[
 	{
 		label: 'hx',
@@ -86,7 +72,6 @@ class Vacation extends React.Component{
 		img:{
 			files:data
 		},
-		reserve:'',
 		approver:'',
 	}
 
@@ -161,23 +146,6 @@ class Vacation extends React.Component{
 							placeholder="填写休假事由"
 							defaultValue=""
 						/>
-						<Picker 
-							data={reserveList} 
-							cols={1} 
-							value={this.state.reserve} 
-							onChange={reserve => this.setState({reserve})}
-							extra="无"
-							title="备岗人员">
-							<List.Item arrow="horizontal">备岗人员</List.Item>
-						</Picker>
-						<Item extra={'上传医院病假条等'}>图片</Item>
-						<ImagePicker
-							files={files}
-							onChange={this.onChangeImg}
-							onImageClick={(index, fs) => console.log(index, fs)}
-							multiple={true}
-							// onAddImageClick={this.onAddImageClick}
-						/>
 						<Picker
 							data={approverList} 
 							cols={1} 
@@ -187,6 +155,14 @@ class Vacation extends React.Component{
 							title="审批人员">
 							<List.Item arrow="horizontal">审批人员</List.Item>
 						</Picker>
+						<Item extra={'上传医院病假条等'}>图片</Item>
+						<ImagePicker
+							files={files}
+							onChange={this.onChangeImg}
+							onImageClick={(index, fs) => console.log(index, fs)}
+							multiple={true}
+							// onAddImageClick={this.onAddImageClick}
+						/>
 						<Item className="btnGroup">
 							<Button type="primary" size="small" inline onClick={this.onSubmit}>提交</Button>
 							<Button size="small" inline style={{ marginLeft: '2.5px' }} onClick={this.onReset}>取消</Button>
