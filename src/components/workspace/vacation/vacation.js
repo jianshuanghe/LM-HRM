@@ -161,15 +161,17 @@ class Vacation extends Component {
           console.log("response data: ", response);
           var data = response.data.data;
           var resData = this.state.data;
-          if(resData.length === 0){
-            data.key = "1";
-            resData.push(data);
-          }else{
-            for(var i=0;i<resData.length;i++){
-              if(data.id !== resData[i].id){
-                this.state.data.push(data);
+          if(data){
+            if(resData.length === 0){
+              data.key = "1";
+              resData.push(data);
+            }else{
+              for(var i=0;i<resData.length;i++){
+                if(data.id !== resData[i].id){
+                  this.state.data.push(data);
+                }
+                resData[i].key = (i+1).toString();
               }
-              resData[i].key = (i+1).toString();
             }
           }
           console.log("this.state.data： ",this.state.data);

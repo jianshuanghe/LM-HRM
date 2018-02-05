@@ -61,7 +61,7 @@ class Vacation extends Component {
                       {getFieldDecorator('employeeId',{
                           rules:[{required:true,message:'请输入员工编号！'}]
                       })(
-                          <Input name="employeeId"  onChange={this.handleChange}/>
+                          <Input name="employeeId" placeholder="测试数据：'string'"  onChange={this.handleChange}/>
                       )}
                   </FormItem>
               </Col>
