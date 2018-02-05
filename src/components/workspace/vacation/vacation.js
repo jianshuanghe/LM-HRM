@@ -87,7 +87,10 @@ class Vacation extends Component {
                     </Popconfirm>
                   </span>
                   :
-                  <a onClick={() => this.edit(record.key)}>编辑</a>
+                  <p>
+                    <a onClick={() => this.edit(record.key)}>编辑</a>  <a>待审批</a>
+                  </p>
+
               }
             </div>
           );

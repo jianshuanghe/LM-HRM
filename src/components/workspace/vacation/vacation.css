@@ -10,3 +10,6 @@
 .VacationTable .ant-table-tbody tr{
   background: #fff;
 }
+.ant-table-wrapper.VacationTable{
+  width:90%;
+}
