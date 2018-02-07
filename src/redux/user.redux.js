@@ -52,7 +52,8 @@ export function login({username, password}) {
 					console.log('登录成功');
 					console.log(res);
 					console.log(res.data);
-					// let redirectTo = '';
+					localStorage.setItem('userDate', JSON.stringify(res.data));
+					let redirectTo = '';
 					// if (res.data.role === 'superAdmin') {
 					// 	redirectTo = '/workspace/attendance';
 					// } else {
