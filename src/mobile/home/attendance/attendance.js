@@ -2,7 +2,6 @@ import React from 'react';
 import { Flex, PullToRefresh} from 'antd-mobile';
 import axios from 'axios';
 import './attendance.css';
-
 class Attendance extends React.Component{
     constructor(props) {
         super(props);
@@ -13,14 +12,22 @@ class Attendance extends React.Component{
             refreshing: false,
             height: (document.documentElement.clientHeight) - 100,
             
-            checkAttendance: '',
-            common: '',
-            overtime: '',
-            privateleave: '',
+            // 额定工时
+            ratedWorkingHours: '',
+            // 实际工时
+            actualWorkingHours: '',
+            // 加班工时
+            overtimeWorkingHours: '',
+            // 事假时长
+            affairLeave: '',
+            // 病假时长
             sickLeave: '',
+            // 年假时长
             annualLeave: '',
-            restTrim: '',
-            annualRemain: ''
+            // 调休时长
+            takeTimeOff: '',
+            // 年假剩余时长
+            remainAnnual: '',
         }
     }
     componentWillMount() {
@@ -28,16 +35,41 @@ class Attendance extends React.Component{
         this.setUpdate();
     }
     queryAttendance() {
-        this.setState({
-            checkAttendance: '1',
-            common: '2',
-            overtime: '3',
-            privateleave: '4',
-            sickLeave: '5',
-            annualLeave: '6',
-            restTrim: '7',
-            annualRemain: '8'
+        let userInfo = JSON.parse(localStorage.getItem('userDate'));
+       // let employeeCode = userInfo.employeeCode;
+       // let employeeName = userInfo.employeeName;
+        let employeeCode = '00091287';
+        let employeeName = '李四';
+        let startTime = '2017-07-29';
+        let endTime = '2017-07-30';
+       // let params = {userId:userId,employeeCode:employeeCode };
+        let params = {
+            employeeCode: employeeCode,
+            employeeName: employeeName,
+            startTime: startTime,
+            endTime: endTime
+        };
+        axios.get('/server0/attendanceTotal/condition',{
+            params: params
         })
+        .then((resp) => {
+            console.log(resp);
+            let result = resp.data.data;
+             this.setState({
+                ratedWorkingHours: result.ratedWorkingHours,
+                actualWorkingHours: result.actualWorkingHours,
+                overtimeWorkingHours:result.overtimeWorkingHours,
+                affairLeave: result.affairLeave,
+                sickLeave: result.sickLeave,
+                annualLeave: result.annualLeave,
+                takeTimeOff: result.takeTimeOff,
+                remainAnnual: result.remainAnnual,
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+       
     }
     setUpdate() {
         let nowdays = new Date();  
@@ -79,22 +111,22 @@ class Attendance extends React.Component{
                             <Flex.Item><span>{this.state.upfirst}——{this.state.uplast}</span></Flex.Item>
                         </Flex>
                         <Flex>
-                            <Flex.Item><span>出勤核定：{this.state.checkAttendance}</span></Flex.Item>
+                            <Flex.Item><span>出勤核定：{this.state.ratedWorkingHours}</span></Flex.Item>
                         </Flex>
                         <Flex>
-                            <Flex.Item><span>实际出勤：{this.state.common}</span></Flex.Item>
-                            <Flex.Item><span>加班时长：{this.state.overtime}</span></Flex.Item>
+                            <Flex.Item><span>实际出勤：{this.state.actualWorkingHours}</span></Flex.Item>
+                            <Flex.Item><span>加班时长：{this.state.overtimeWorkingHours}</span></Flex.Item>
                         </Flex>
                         <Flex>
-                            <Flex.Item><span>事假时长：{this.state.privateleave}</span></Flex.Item>
+                            <Flex.Item><span>事假时长：{this.state.affairLeave}</span></Flex.Item>
                             <Flex.Item><span>病假时长：{this.state.sickLeave}</span></Flex.Item>
                         </Flex>
                         <Flex>
                             <Flex.Item><span>年假时长：{this.state.annualLeave}</span></Flex.Item>
-                            <Flex.Item><span>调休时长：{this.state.restTrim}</span></Flex.Item>
+                            <Flex.Item><span>调休时长：{this.state.takeTimeOff}</span></Flex.Item>
                         </Flex>
                         <Flex>
-                            <Flex.Item><span>年假剩余时长：{this.state.annualRemain}</span></Flex.Item>
+                            <Flex.Item><span>年假剩余时长：{this.state.remainAnnual}</span></Flex.Item>
                         </Flex>
                     </div>
                 </div>
