@@ -21,11 +21,42 @@ const typeList = [
 		value: '年假',
 	},
 	{
+		label: '调休',
+		value: '调休',
+	},
+	{
 		label: '病假',
 		value: '病假',
 	},
+	{
+		label: '婚假',
+		value: '婚假',
+	},
+	{
+		label: '产假',
+		value: '产假',
+	},
+	{
+		label: '陪产假',
+		value: '陪产假',
+	},
+	{
+		label: '丧假',
+		value: '丧假',
+	},
 ]
 // 开始结束时间（min-max）
+var formatDateTime = function (date) {  
+    var y = date.getFullYear();  
+    var m = date.getMonth() + 1;  
+    m = m < 10 ? ('0' + m) : m;  
+    var d = date.getDate();  
+    d = d < 10 ? ('0' + d) : d;  
+    var h = date.getHours();  
+    var minute = date.getMinutes();  
+    minute = minute < 10 ? ('0' + minute) : minute;  
+    return y + '-' + m + '-' + d+' '+h+':'+minute;  
+}
 const nowTimeStamp = Date.now();
 
 const start = new Date(nowTimeStamp);
@@ -48,8 +79,8 @@ const approverList=[
 		value: '3',
 	},
 ]
-//审批人员
 
+//审批人员
 class Vacation extends React.Component{
 	
 	constructor(props) {
@@ -57,8 +88,21 @@ class Vacation extends React.Component{
 	}
 
 	componentWillMount() {
-		var id = '5a43360e2e196109f457a509' 
-		axios.post('/server0/personalHolidayInfo/',{id})
+		var storage=window.localStorage
+		var json=storage.getItem("userDate")
+		var jsonObj=JSON.parse(json)
+	   
+		console.log(jsonObj)
+
+		var userId = jsonObj.userId
+		axios.get('/server0/personalHolidayInfo/'+userId)
+		.then((resp) => {
+			console.log(resp)
+		})
+
+		var departmentID = '001' 
+		// jsonObj.departmentID
+		axios.get('/server0/vacation/auditorList?departmentCode='+departmentID)
 		.then((resp) => {
 			console.log(resp)
 		})
@@ -92,6 +136,18 @@ class Vacation extends React.Component{
 
 	onSubmit = () => {
 		console.log(this.state)
+		console.log(formatDateTime(this.state.startDate))
+		// var vacationData ={
+		// 	"applyDescribe": this.state.cause,
+		// 	"applyHours": "6",
+		// 	"applyId": "string",
+		// 	"approverId": "string",
+		// 	"audisDescribe": "string",
+		// 	"audisResult": "string",
+		// 	"beginDate": "2018-02-11T02:07:32.642Z",
+		// 	"holidayCode": "001",
+		// 	"userId": "string"
+		// }
 	}
 
 	onReset = () => {
