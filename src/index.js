@@ -17,7 +17,7 @@ import SiderBar from './components/sider/sider';
 
 import Container from './mobile/container/container';
 
-// import './common/config';
+import './common/config';
 
 const store = createStore(reducers, compose(
 	applyMiddleware(thunk),
