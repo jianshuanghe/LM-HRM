@@ -31,23 +31,24 @@ class Attendance extends React.Component{
         }
     }
     componentWillMount() {
-        this.queryAttendance();
         this.setUpdate();
+        this.queryAttendance();
     }
     queryAttendance() {
         let userInfo = JSON.parse(localStorage.getItem('userDate'));
        // let employeeCode = userInfo.employeeCode;
-       // let employeeName = userInfo.employeeName;
-        let employeeCode = '00091287';
-        let employeeName = '李四';
-        let startTime = '2017-07-29';
-        let endTime = '2017-07-30';
-       // let params = {userId:userId,employeeCode:employeeCode };
+       // let userId = userInfo.userId;
+        let employeeCode = '00091288';
+        let userId = 'string';
+        let startTime = '2017-07-01';
+        let endTime = '2017-07-31';
         let params = {
-            employeeCode: employeeCode,
-            employeeName: employeeName,
-            startTime: startTime,
-            endTime: endTime
+            attendanceStr : {
+                employeeCode: employeeCode,
+                userId: userId,
+                startTime: startTime,
+                endTime: endTime
+            }
         };
         axios.get('/server0/attendanceTotal/condition',{
             params: params
