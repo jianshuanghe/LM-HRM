@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import SalaryBable from './salary-table'
 import WrappedSalaryForm from './salary-form'
-import {Modal, notification} from 'antd'
+import {Modal,message} from 'antd'
 import './salary.css'
 import querystring from 'query-string';
 
@@ -33,6 +33,7 @@ class Salary extends React.Component{
         .then(function (response) {
             console.log('查询suc', response);
             if (response.status === 200) {
+                message.success('查询成功！');
                 let res = response.data;
                 res.forEach((item,index) => (item.key = index + ''));
                 _this.setState({
@@ -42,11 +43,11 @@ class Salary extends React.Component{
                     cache: res.map(item => ({...item}))
                 });
             } else {
-                notification.error({message:'查询失败'});
+                message.error('查询失败！');
             }
         })
         .catch(function (error) {
-            notification.error({message:'查询失败'});
+            message.error('查询失败');
             console.log('查询error', error);
         })
     }
@@ -84,13 +85,13 @@ class Salary extends React.Component{
                 if (response.status === 200) {
                     Object.assign(target,response.data);
                     target.key = localKey;
-                    notification.success({message:'修改保存成功'});
+                    message.success('修改保存成功');
                     _this.setState({
                         data: newData,
                         cache: newData.map(item => ({...item}))  
                     })
                 } else {
-                    notification.error({message:'修改保存失败'});
+                    message.error('修改保存失败');
                     target.key = localKey;
                     Object.assign(target,_this.state.cache.filter(item => key === item.key)[0]);
                     delete target.editable;
@@ -98,7 +99,7 @@ class Salary extends React.Component{
                 }
             })
             .catch(function (error) {
-                notification.error({message:'修改保存失败'});
+                message.error('修改保存失败');
                 console.log('error', error);
                 target.key = localKey;
                 Object.assign(target,_this.state.cache.filter(item => key === item.key)[0]);

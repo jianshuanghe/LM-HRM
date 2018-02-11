@@ -1,0 +1,19 @@
+.ant-table-wrapper {
+    background: #fff;
+}
+.modal-button{
+    text-align: right;
+}
+.modal-button button{
+    margin: 0 5px;
+}
+.add-button{
+    float: right;
+    margin-right: 50px;
+}
+.salary-record>h1{
+    margin-left: 20px;
+}
+.btn-delete{
+    margin-left: 10px;
+}
