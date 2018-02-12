@@ -76,13 +76,10 @@ class Home extends React.Component {
           <WhiteSpace size="xl" />
           <ul>
               {homeList.map( r => (
-                <li key={r.path}
-                onClick={() => {
-		              this.props.history.push(r.path)
-		            }}>
+                <li key={r.path} onClick={() => { this.props.history.push(r.path)}}>
                   <img src={require(`./img/${r.src}.png`)} alt=""/>
                   <span>{r.text}</span>
-                  <div class="hintNum"><Badge text={22}/></div>
+                  {/* <div class="hintNum"><Badge text={22}/></div> */}
                 </li> 
               ))}
           </ul>

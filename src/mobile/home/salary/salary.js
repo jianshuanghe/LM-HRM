@@ -83,7 +83,6 @@ class Salary extends React.Component{
 			let result = (resp.data)[0];
 			let pretaxSalary = (result.baseSalary+result.foodSubsidy+result.jobtitleSubsidy+result.educationSubsidy);
 			let afttaxSalary = pretaxSalary - result.tax;
-			
 			this.setState({
 				baseSalay: result.baseSalary,
 				foodSubsidy: result.foodSubsidy,

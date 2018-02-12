@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Select, Row, Col, DatePicker } from 'antd';
-import axios from 'axios';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -18,7 +17,8 @@ class Vacation extends Component {
       employeeId: '',
       rank: '',
       startDate: '',
-      endDate:''
+      endDate:'',
+      data:''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,22 +43,9 @@ class Vacation extends Component {
   handleSubmit (e) {
     e.preventDefault();
     console.log(this.state);
-    this.props.form.validateFields((err,values) => {
-        if(!err){
-            this.props.onSearch(this.state.employeeId);
-        }
-    })
-    // let query = {
-    //   pageNumber: 1,
-    //   pageSize: 10
-    // }
-    // axios.get('/holiday/findAll', {params: query})
-    //   .then((response) => {
-    //     console.log(response);
-    //   }, (response) => {
-    //     console.log("error");
-    //    });
+    this.props.query(this.state.employeeId);
   }
+
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
@@ -74,7 +61,7 @@ class Vacation extends Component {
                       {getFieldDecorator('employeeId',{
                           rules:[{required:true,message:'请输入员工编号！'}]
                       })(
-                          <Input name="employeeId" type='number' onChange={this.handleChange}/>
+                          <Input name="employeeId" placeholder="测试数据：'string'"  onChange={this.handleChange}/>
                       )}
                   </FormItem>
               </Col>

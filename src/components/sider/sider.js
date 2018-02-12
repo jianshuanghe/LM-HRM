@@ -13,7 +13,7 @@ import Rank from '../record/rank';
 import VacationR from '../workspace/vacation/vacationFile';
 import VacationA from '../workspace/vacation/vacationApproval';
 import Organization from '../record/organization';
-import SalaryR from '../record/salary';
+import SalaryR from '../record/salary/salary';
 
 import Logo from '../../common/logo/logo';
 import Head from '../head/head';
