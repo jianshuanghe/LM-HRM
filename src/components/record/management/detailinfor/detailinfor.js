@@ -18,27 +18,32 @@ const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
 class Detailinfor extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    console.log('检测 props 属性的改变', nextProps);
+  }
   componentDidMount() {
+   console.log(this.props.data, '5555');
+   let data = this.props.data;
     this.props.form.setFieldsValue({
       Emp996: "3123",
       EmpEdutype: "01",
-      EmpGraduatime: moment("1995-12-25"),
-      EmpHightedu: "01",
-      EmpIDcard: "3213",
-      EmpJobtype: "01",
+      EmpGraduatime: moment(),
+      EmpHightedu: data.degree,
+      EmpIDcard: data.cardId,
+      EmpJobtype: data.getDuty,
       EmpPositional: "01",
       EmpRank: "01",
-      EmpUniversity: "321313",
+      EmpUniversity: data.graduateSchool,
       EmpZipcode: "123213",
       Empaccumubase: "3123",
-      Empdisability: "no",
+      Empdisability: data.disability,
       Empeducationhelp: "3213",
       Empentrytime: moment("1992-12-25"),
       Empfoodhelp: "31231",
-      Empgender: "male",
+      Empgender: data.sex,
       Emphousehold: "01",
-      Empname: "3213",
-      Empnumber: "12321",
+      Empname: data.employeeName,
+      Empnumber: data.employeeCode,
       Empnumberchildren: "1",
       Empother: "3123",
       Empotherhelp: "3213",
@@ -48,7 +53,7 @@ class Detailinfor extends React.Component {
       Empsalary: "3213",
       Empsocialbase: "3123",
       Empturntime: moment("1993-12-25"),
-      address: ["天津市", "天津市"],
+      address: ["北京市","北京市"],
       upload: []
     });
   }
@@ -95,17 +100,16 @@ class Detailinfor extends React.Component {
       } 
       console.log(Arr);
       console.log(EmpGraduatime,Empentrytime,Empturntime);
-      // axios.get('http://47.95.229.11:8080/employeeInfo/findByHireDate', {
-      // 　　pageNumber:'',
-      //     pageSize: '',
-      //     hireDate: ''
-      // },dataType: 'jsonp',).then(function (response) {
-      //     console.log(response);
-      // 　　console.log('请求成功');
-      // }).catch(function (error) {
-      // 　　console.log(error);
-      //     console.log('请求失败');
-      // })
+      console.log(EmpGraduatime,Empentrytime,Empturntime);
+      console.log(this.props.data[0], 'id');
+      let employId = this.props.data[0].id; // 员工id号
+      axios.put('/server1/employeeInfo?id='+ employId,Arr)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+
+      })
     });
   }
   render() {
@@ -347,8 +351,8 @@ class Detailinfor extends React.Component {
               labelCol={{ span: 4 }}
               wrapperCol={{ span: 8 }}>
                 <RadioGroup {...Empgender}>
-                  <Radio value="male">男</Radio>
-                  <Radio value="female">女</Radio>
+                  <Radio value="M">男</Radio>
+                  <Radio value="F">女</Radio>
                 </RadioGroup>
             </FormItem>
             <FormItem
@@ -364,8 +368,8 @@ class Detailinfor extends React.Component {
               labelCol={{ span: 4 }}
               wrapperCol={{ span: 8 }}>
                 <RadioGroup {...Empdisability}>
-                  <Radio value="no">否</Radio>
-                  <Radio value="Yes">是</Radio>
+                  <Radio value="N">否</Radio>
+                  <Radio value="Y">是</Radio>
                 </RadioGroup>
             </FormItem>
             <FormItem

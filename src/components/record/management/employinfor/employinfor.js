@@ -64,22 +64,11 @@ class EmployInfor extends React.Component {
         Empturntime = moment(Arr.Empturntime._d).format('YYYY-MM-DD'); // 转正时间
         Arr.Empturntime = Empturntime;
       }
+      // 获取填写的数据
       console.log(Arr);
+      // 接口
       console.log(EmpGraduatime,Empentrytime,Empturntime);
-      $.ajax({
-        url: "http://47.95.229.11:8080/employeeInfo/findByDepartmentCode",
-        type: "GET",
-        data:Arr,
-        dataType: 'JSONP',
-        success: function(data){
-          console.log('chengong ')
-        }
-      });
-      axios.get('http://47.95.229.11:8080/employeeInfo/findByDepartmentCode', {
-      　　pageNumber:'',
-          pageSize: '',
-          hireDate: ''
-      }).then(function (response) {
+      axios.post('/server1/employeeInfo', Arr).then(function (response) {
           console.log(response);
       　　console.log('请求成功');
       }).catch(function (error) {

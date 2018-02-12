@@ -20,28 +20,31 @@ const EditableCell = ({ editable, value, onChange }) => (
   </div>
 );
 class Tabalstaff extends React.Component{
+	componentDidMount(){
+		// console.log(this.props.data, '3333');
+	}
 	constructor(props) {
 	    super(props);
 	    this.columns = [{
 	      title: '员工编号',
-	      dataIndex: 'number',
+	      dataIndex: 'employeeCode',
 	      width: '16%',
-	      render: (text, record) => this.renderColumns(text, record, 'number'),
+	      render: (text, record) => this.renderColumns(text, record, 'employeeCode'),
 	    }, {
 	      title: '姓名',
-	      dataIndex: 'name',
+	      dataIndex: 'employeeName',
 	      width: '15%',
-	      render: (text, record) => this.renderColumns(text, record, 'name'),
+	      render: (text, record) => this.renderColumns(text, record, 'employeeName'),
 	    }, {
 	      title: '职级',
-	      dataIndex: 'rank',
+	      dataIndex: 'joblevel',
 	      width: '15%',
-	      render: (text, record) => this.renderColumns(text, record, 'rank'),
+	      render: (text, record) => this.renderColumns(text, record, 'joblevel'),
 	    }, {
 	      title: '部门',
-	      dataIndex: 'branch',
+	      dataIndex: 'department.departmentName',
 	      width: '15%',
-	      render: (text, record) => this.renderColumns(text, record, 'branch'),
+	      render: (text, record) => this.renderColumns(text, record, 'department.departmentName'),
 	    }, {
 	      title: '基本薪资',
 	      dataIndex: 'basicSalary',
@@ -63,14 +66,14 @@ class Tabalstaff extends React.Component{
 	            {
 	              editable ?
 	                <span>
-	                  <a onClick={() => this.save(record.key)}>保存/</a>
+	                  <a onClick={() => this.save(record.key,record.id)}>保存/</a>
 	                  <Popconfirm title="Sure to cancel?" onConfirm={() => this.cancel(record.key)}>
 	                    <a>取消</a>
 	                  </Popconfirm>
 	                </span>
 	                : <span>
 	                    <a onClick={() => this.edit(record.key)}>编辑 / </a>
-		              	<a onClick={() => this.DetailInfor(record.key)}>详细信息</a>
+		              	<a onClick={() => this.DetailInfor(record.id)}>详细信息</a>
 	                  </span>
 	            }
 	          </div>
@@ -90,17 +93,28 @@ class Tabalstaff extends React.Component{
 	    );
 	  }
 	  DetailInfor (key){
-	  	var EmpNumber = key;
+	  	alert(key);
+	  	var id = key;
 	  	var ShowInfor = true;
-    	this.props.onDetailSubmit({EmpNumber,ShowInfor});
-	    console.log(EmpNumber, ShowInfor);
+    	this.props.onDetailSubmit({id,ShowInfor});
+	    console.log(id, ShowInfor);
 	  }
 	  handleChange(value, key, column) {
 	    const newData = [...this.props.data];
 	    const target = newData.filter(item => key === item.key)[0];
+	    console.log(target, 's1');
+	    console.log(key, 's2');
+	    console.log(column, 's3');
 	    if (target) {
-	      target[column] = value;
-	      this.setState({ data: newData });
+	      	target[column] = value;
+	      	let mentName = target.department;
+	      	console.log(mentName, 'sss');
+	      	// 如果修改的是部门，则将部门里的数据置换调
+	      	if (column === 'department.departmentName') {
+	      		mentName.departmentName = value;
+	      	}
+	      	console.log(mentName, 's是1');
+	      	this.setState({ data: newData });
 	    }
 	  }
 
@@ -112,14 +126,25 @@ class Tabalstaff extends React.Component{
 	      this.setState({ data: newData });
 	    }
 	  }
-	  save(key) {
+	  // 修改员工信息保存
+	  save(key, id) {
+	  	console.log(id, 'xiaoyun');
 	    const newData = [...this.props.data];
 	    const target = newData.filter(item => key === item.key)[0];
+	    console.log(target, 'anyun');
+	    let employId = id; // 员工id号
 	    if (target) {
-	      delete target.editable;
-	      this.setState({ data: newData });
-	      console.log(newData,'jianshuanghe');
-	      this.cacheData = newData.map(item => ({ ...item }));
+	      	delete target.editable;
+	      	this.setState({ data: newData });
+	      	this.cacheData = newData.map(item => ({ ...item }));
+	      	let _this = this;
+	        axios.put('/server1/employeeInfo?id='+ employId,target)
+	        .then(function (response) {
+	        	console.log(response);
+	        })
+	        .catch(function (error) {
+
+	        })
 	    }
 	  }
 	  cancel(key) {

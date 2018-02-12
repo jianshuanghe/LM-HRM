@@ -46,7 +46,7 @@ export function login({username, password}) {
 	params.username = username;
 	params.password = password;
 	return dispatch => {
-		axios.post('/server1/employeeInfo/login', querystring.stringify(params))
+		axios.post('/server1/employeeInfo/login?username=shixx%40vipsdb.com&password=123456&appId=1')
 			.then(res => {
 				if (res.status === 200) {
 					console.log('登录成功');
