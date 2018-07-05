@@ -67,7 +67,7 @@ class Tabalstaff extends React.Component{
 	              editable ?
 	                <span>
 	                  <a onClick={() => this.save(record.key,record.id)}>保存/</a>
-	                  <Popconfirm title="Sure to cancel?" onConfirm={() => this.cancel(record.key)}>
+	                  <Popconfirm title="确定要取消吗?" onConfirm={() => this.cancel(record.key)}>
 	                    <a>取消</a>
 	                  </Popconfirm>
 	                </span>
@@ -93,7 +93,6 @@ class Tabalstaff extends React.Component{
 	    );
 	  }
 	  DetailInfor (key){
-	  	alert(key);
 	  	var id = key;
 	  	var ShowInfor = true;
     	this.props.onDetailSubmit({id,ShowInfor});
@@ -112,6 +111,7 @@ class Tabalstaff extends React.Component{
 	      	// 如果修改的是部门，则将部门里的数据置换调
 	      	if (column === 'department.departmentName') {
 	      		mentName.departmentName = value;
+	      		column = ''; // 删除增加的键值
 	      	}
 	      	console.log(mentName, 's是1');
 	      	this.setState({ data: newData });
@@ -151,6 +151,7 @@ class Tabalstaff extends React.Component{
 	    const newData = [...this.props.data];
 	    const target = newData.filter(item => key === item.key)[0];
 	    if (target) {
+	    	this.cacheData = newData.map(item => ({ ...item }));
 	      Object.assign(target, this.cacheData.filter(item => key === item.key)[0]);
 	      delete target.editable;
 	      this.setState({ data: newData });

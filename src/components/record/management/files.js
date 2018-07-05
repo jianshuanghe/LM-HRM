@@ -253,27 +253,26 @@ class Files extends React.Component{
 	}
 	detail(ev){
 		console.log(ev,'sss');
-	    this.setState({detailinfor: ev.ShowInfor, key:ev.key});
-	    console.log(this.state.detailinfor, this.state.key, 'kkk')
+	    // this.setState({detailinfor: ev.ShowInfor, key:ev.key});
+	    // console.log(this.state.detailinfor, this.state.key, 'kkk')
 	    let pageNumber = 1;
 	    let pageSize = 1;
 	    let _this = this;
         axios.post('/server1/employeeInfo/condition/page?pageNumber='+ pageNumber+ '&pageSize=' +pageSize ,{id: ev.id})
         .then(function (response) {
-        	alert('1');
         	console.log(response);
         	let Response = response.data[0];
         	
         	console.log(Response, 'wo');
         	_this.setState({
-		        List : Response
+		        List : Response,
+		        detailinfor : ev.ShowInfor,
+		        key : ev.key
 	        });
 	        _this.setState({
 		        cacheData: Response
 		    });
 	        console.log(_this.state.List, 'eeeeee');
-	        alert('2')
-
         })
         .catch(function (error) {
 

@@ -18,16 +18,12 @@ const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
 class Detailinfor extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    console.log('检测 props 属性的改变', nextProps);
-  }
   componentDidMount() {
-   console.log(this.props.data, '5555');
    let data = this.props.data;
     this.props.form.setFieldsValue({
       Emp996: "3123",
       EmpEdutype: "01",
-      EmpGraduatime: moment(),
+      EmpGraduatime: moment(data.graduateTime),
       EmpHightedu: data.degree,
       EmpIDcard: data.cardId,
       EmpJobtype: data.getDuty,
@@ -101,8 +97,8 @@ class Detailinfor extends React.Component {
       console.log(Arr);
       console.log(EmpGraduatime,Empentrytime,Empturntime);
       console.log(EmpGraduatime,Empentrytime,Empturntime);
-      console.log(this.props.data[0], 'id');
-      let employId = this.props.data[0].id; // 员工id号
+      console.log(this.props.data, 'id');
+      let employId = this.props.data.id; // 员工id号
       axios.put('/server1/employeeInfo?id='+ employId,Arr)
       .then(function (response) {
         console.log(response);
